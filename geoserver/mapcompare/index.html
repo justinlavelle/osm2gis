@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Map Compare | OSM-in-a-Box</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="copyright" content="Copyright 2009 Geofabrik GmbH" />
+<style type="text/css">@import url(css/mc.css) all; </style>
+<style type="text/css">@import url(css/style.css) all;</style>
+        
+        <!--[if IE]>
+			<link rel="stylesheet" type="text/css" href="css/style_ie.css" />
+		<![endif]-->
+        <style type="text/css">
+		body {
+			margin-left: 0px;
+			margin-top: 7px;
+			height: 90%;
+			width: 100%;
+			overflow:hidden;
+        }
+        #map {
+			width: 100%;
+			border-top: 1px solid #999;
+        }
+    	</style>
+</head>
+<body>
+<div id="header">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="215" rowspan="2"><a href="http://www.hsr.ch/index.php?id=1155" target="_blank"><img src="img/hsr_logo.png" border="0" /></a></td>
+      <td height="33" id="title">Map Compare</td>
+      <td width="138" rowspan="2" id="osmlogo"><a href="http://dev.ifs.hsr.ch/osminabox/wiki/" target="_blank"><img src="img/osminabox_logo.png" border="0" align="absmiddle" /></a></td>
+    </tr>
+  </table>
+</div>
+<table width="100%">
+  <tr>
+    <td class="maps"><form action="" class="switch">
+        <div> Choose map type:
+          <select id="sw0" name="sw0">
+          </select>
+        </div>
+      </form>
+      <div class="map" id="map0"></div></td>
+    <td class="maps"><form action="" class="switch">
+        <div> Choose map type:
+          <select id="sw1" name="sw1">
+          </select>
+        </div>
+      </form>
+      <div class="map" id="map1"></div></td>
+  </tr>
+</table>
+<div id="bottom">
+  <div id="map-rights">  Map Compare by <a href="http://www.geofabrik.de/">Geofabrik GmbH</a> | Map Data &amp; Software by <a href="http://www.openstreetmap.org/">OpenStreetMap Contributors</a>  | OpenStreetMap License <a rel="license" href="http://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a> | <a href="http://dev.ifs.hsr.ch/osminabox" target="_blank">Terms of Use</a> | <a href="http://dev.ifs.hsr.ch/osminabox">Contact</a></div>
+  <div id="map-decoration"><span id="customMousePosition"></span><span id="customZoomLevel">zoom=</span> <span id="customPermalink"><a href="" id="permalink">Permalink</a></span> </div>
+</div>
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/jqModal-r14.js"></script>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAVzbz1BL0LocvMWl2VlwkbxRb_tnNnNin_SiYOfzdnHjBjYVP1BS-Xp1TZZNTKVCgAed7-Qi7D0up0Q" type="text/javascript"></script>
+<script type="text/javascript" src="js/OpenLayers.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/mc.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osmChange version="0.6" generator="Osmosis 0.37-SNAPSHOT">
+  <create>
+	<node id="1" version="0" timestamp="2011-01-31T09:08:59Z" uid="1" user="Tester" changeset="1" lat="1" lon="2"/>
+	<node id="2" version="0" timestamp="2011-01-31T09:08:59Z" uid="1" user="Tester" changeset="1" lat="3" lon="4"/>
+	<node id="3" version="0" timestamp="2011-01-31T09:08:59Z" uid="1" user="Tester" changeset="1" lat="5" lon="6"/>
+  </create>
+  
+   <create>
+	<way id="4" version="0" timestamp="2011-01-31T09:03:51Z" uid="1" user="Tester" changeset="1">
+      <nd ref="1"/>
+      <nd ref="2"/>
+      <nd ref="3"/>
+      <tag k="highway" v="motorway"/>
+      <tag k="name" v="TestStrasse"/>
+    </way>
+  </create>
+  
+  <create>
+    <relation id="5" timestamp="2011-01-31T09:18:18Z" uid="1" user="Tester" changeset="1">
+      <tag k="network" v="rcn"/>
+      <tag k="operator" v="Testing + Co."/>
+      <tag k="route" v="bicycle"/>
+      <tag k="type" v="route"/>
+      <tag k="ref" v="21"/>
+       <member type="way" ref="4" role=""/>
+    </relation>
+  </create>
+</osmChange>

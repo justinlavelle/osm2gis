@@ -1,0 +1,2963 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema_def_and_mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="mappingconfig_v1.xsd">
+	<dst_schema_def>
+		<dst_table_def name="gisentity">
+			<dst_column name="osm_id" type="bigint" not-null="true" />
+			<dst_column name="lastchange" type="TIMESTAMP" not-null="false" />
+			<dst_column name="type" type="VARCHAR(255)" not-null="false" />
+			<dst_column name="name" type="VARCHAR(255)" not-null="false" />
+			<dst_column name="keyvalue" type="hstore" />
+		</dst_table_def>		
+		<dst_table_def name="water" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326, 'MULTIPOLYGON', 2)" />
+		</dst_table_def>
+		<dst_table_def name="landuse" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326, 'MULTIPOLYGON', 2)" />
+		</dst_table_def>
+		<dst_table_def name="coastline" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326, 'LINESTRING', 2)" />
+		</dst_table_def>
+		<dst_table_def name="building" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326, 'LINESTRING', 2)" />
+		</dst_table_def>
+		<dst_table_def name="building_indoor" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+		</dst_table_def>
+		<dst_table_def name="indoor" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326,'POINT',2)" />
+			<dst_column name="description" type="text" />
+			<dst_column name="level" type="VARCHAR(20)" />
+			<dst_column name="website" type="VARCHAR(255)" />
+			<dst_column name="wikipedia" type="VARCHAR(255)" />
+			<dst_column name="image_url" type="VARCHAR(255)" />
+			<dst_column name="video_url" type="VARCHAR(255)" />
+			<dst_column name="audio_url" type="VARCHAR(255)" />
+		</dst_table_def>
+		<dst_table_def name="railway" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326, 'LINESTRING', 2)" />
+		</dst_table_def>
+		<dst_table_def name="trainroute" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="ref" type="VARCHAR(255)" />
+			<dst_column name="route" type="VARCHAR(255)" />
+			<dst_column name="network" type="VARCHAR(255)" />
+			<dst_column name="operator" type="VARCHAR(255)" />
+		</dst_table_def>
+		<dst_table_def name="boundary" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326, 'LINESTRING', 2)" />
+		</dst_table_def>
+		<dst_table_def name="boundary_multipolygon" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326, 'MULTIPOLYGON', 2)" />
+		</dst_table_def>
+		<dst_table_def name="railwaystation" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326,'POINT',2)" />
+		</dst_table_def>
+		<dst_table_def name="pofw" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326,'POINT',2)" />
+		</dst_table_def>
+		<dst_table_def name="poi" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326,'POINT',2)" />
+		</dst_table_def>
+		<dst_table_def name="waterway" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="width" type="VARCHAR(25)" />
+			<dst_column name="geom" type="geometry(4326, 'LINESTRING', 2)" />
+		</dst_table_def>
+		<dst_table_def name="road" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="ref" type="VARCHAR(255)" />
+			<dst_column name="road" type="VARCHAR(255)" />
+			<dst_column name="oneway" type="VARCHAR(25)" />
+			<dst_column name="maxspeed" type="VARCHAR(25)" />
+			<dst_column name="superposition" type="smallint" />
+			<dst_column name="layer" type="smallint" />
+			<dst_column name="geom" type="geometry(4326, 'LINESTRING', 2)" />
+		</dst_table_def>
+		<dst_table_def name="route" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="ref" type="VARCHAR(255)" />
+			<dst_column name="route" type="VARCHAR(255)" />
+			<dst_column name="network" type="VARCHAR(255)" />
+		</dst_table_def>
+		<dst_table_def name="network" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="operator" type="VARCHAR(255)" />
+		</dst_table_def>
+		<dst_table_def name="place" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="population" type="integer" />
+			<dst_column name="geom" type="geometry(4326,'POINT',2)" />
+		</dst_table_def>
+		
+		<!--  Create an Index on osm_id for every table -->
+		<dst_table_def_user_defined>
+			<![CDATA[
+				CREATE INDEX "water_osm_id_idx" ON "water" USING btree ("osm_id");
+				CREATE INDEX "landuse_osm_id_idx" ON "landuse" USING btree ("osm_id");
+				CREATE INDEX "coastline_osm_id_idx" ON "coastline" USING btree ("osm_id");
+				CREATE INDEX "building_osm_id_idx" ON "building" USING btree ("osm_id");
+				CREATE INDEX "building_indoor_osm_id_idx" ON "building_indoor" USING btree ("osm_id");
+				CREATE INDEX "indoor_osm_id_idx" ON "indoor" USING btree ("osm_id");
+				CREATE INDEX "railway_osm_id_idx" ON "railway" USING btree ("osm_id");
+				CREATE INDEX "trainroute_osm_id_idx" ON "trainroute" USING btree ("osm_id");
+				CREATE INDEX "boundary_osm_id_idx" ON "boundary" USING btree ("osm_id");
+				CREATE INDEX "boundary_multipolygon_osm_id_idx" ON "boundary_multipolygon" USING btree ("osm_id");
+				CREATE INDEX "railwaystation_osm_id_idx" ON "railwaystation" USING btree ("osm_id");
+				CREATE INDEX "pofw_osm_id_idx" ON "pofw" USING btree ("osm_id");
+				CREATE INDEX "poi_osm_id_idx" ON "poi" USING btree ("osm_id");
+				CREATE INDEX "waterway_osm_id_idx" ON "waterway" USING btree ("osm_id");
+				CREATE INDEX "road_osm_id_idx" ON "road" USING btree ("osm_id");
+				CREATE INDEX "route_osm_id_idx" ON "route" USING btree ("osm_id");
+				CREATE INDEX "network_osm_id_idx" ON "network" USING btree ("osm_id");
+				CREATE INDEX "place_osm_id_idx" ON "place" USING btree ("osm_id");
+			]]>
+		</dst_table_def_user_defined>
+		
+		<!--  Create an Index on type for every table -->
+		<dst_table_def_user_defined>
+			<![CDATA[
+				CREATE INDEX "water_type_idx" ON "water" USING btree ("type");
+				CREATE INDEX "landuse_type_idx" ON "landuse" USING btree ("type");
+				CREATE INDEX "coastline_type_idx" ON "coastline" USING btree ("type");
+				CREATE INDEX "building_type_idx" ON "building" USING btree ("type");
+				CREATE INDEX "building_indoor_type_idx" ON "building_indoor" USING btree ("type");
+				CREATE INDEX "indoor_type_idx" ON "indoor" USING btree ("type");
+				CREATE INDEX "railway_type_idx" ON "railway" USING btree ("type");
+				CREATE INDEX "trainroute_type_idx" ON "trainroute" USING btree ("type");
+				CREATE INDEX "boundary_type_idx" ON "boundary" USING btree ("type");
+				CREATE INDEX "boundary_multipolygon_type_idx" ON "boundary_multipolygon" USING btree ("type");
+				CREATE INDEX "railwaystation_type_idx" ON "railwaystation" USING btree ("type");
+				CREATE INDEX "pofw_type_idx" ON "pofw" USING btree ("type");
+				CREATE INDEX "poi_type_idx" ON "poi" USING btree ("type");
+				CREATE INDEX "waterway_type_idx" ON "waterway" USING btree ("type");
+				CREATE INDEX "road_type_idx" ON "road" USING btree ("type");
+				CREATE INDEX "route_type_idx" ON "route" USING btree ("type");
+				CREATE INDEX "network_type_idx" ON "network" USING btree ("type");
+				CREATE INDEX "place_type_idx" ON "place" USING btree ("type");
+			]]>
+		</dst_table_def_user_defined>
+
+		<dst_join_table_def name="trainroute_to_railway">
+			<dst_column name="trainroute_id" type="int" primary-key="true" references="trainroute" />
+			<dst_column name="railway_id" type="int" primary-key="true" references="railway" />
+		</dst_join_table_def>
+		<dst_join_table_def name="trainroute_to_railwaystation">
+			<dst_column name="trainroute_id" type="int" primary-key="true" references="trainroute" />
+			<dst_column name="railwaystation_id" type="int" primary-key="true" references="railwaystation" />
+			<dst_column name="role" type="VARCHAR(255)" />
+		</dst_join_table_def>
+		<dst_join_table_def name="building_indoor_to_indoor">
+			<dst_column name="building_indoor_id" type="int" primary-key="true" references="building_indoor" />
+			<dst_column name="indoor_id" type="int" primary-key="true" references="indoor" />
+			<dst_column name="role" type="VARCHAR(255)" />
+		</dst_join_table_def>
+		<dst_join_table_def name="route_to_road">
+			<dst_column name="route_id" type="int" primary-key="true" references="route" />
+			<dst_column name="road_id" type="int" primary-key="true" references="road" />
+			<dst_column name="role" type="VARCHAR(255)" />
+		</dst_join_table_def>
+		<dst_join_table_def name="network_to_route">
+			<dst_column name="network_id" type="int" primary-key="true" references="network" />
+			<dst_column name="route_id" type="int" primary-key="true" references="route" />
+			<dst_column name="role" type="VARCHAR(255)" />
+		</dst_join_table_def>
+		<dst_join_table_def name="network_to_trainroute">
+			<dst_column name="network_id" type="int" primary-key="true" references="network" />
+			<dst_column name="trainroute_id" type="int" primary-key="true" references="trainroute" />
+			<dst_column name="role" type="VARCHAR(255)" />
+		</dst_join_table_def>
+
+		<dst_view_def name="landuse_lookup">
+			<![CDATA[
+				CREATE VIEW landuse_lookup AS
+					SELECT First_Select.osm_id, 
+					   First_Select.name, 
+					   First_Select.type, 
+					   landuse.geom
+					FROM landuse,
+					(SELECT MAX(osm_id) AS osm_id, name, type 
+					FROM landuse
+					WHERE name!='' AND type = 'glacier'
+					GROUP BY name, type) as First_Select
+					WHERE First_Select.osm_id = landuse.osm_id;
+					
+					INSERT INTO geometry_columns(
+								f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type")
+					VALUES ('', 'public', 'landuse_lookup', 'geom', 2, 4326, 'MULTIPOLYGON');
+			]]>
+		</dst_view_def>
+
+		<dst_view_def name="place_lookup">
+			<![CDATA[
+				CREATE VIEW place_lookup AS
+					SELECT CASE WHEN type= 'country' then 1
+								WHEN type= 'city' then 2
+								WHEN type= 'town' then 3
+								WHEN type= 'suburb' then 4
+							WHEN type= 'village' then 5
+								WHEN type= 'state' then 6
+								WHEN type= 'region' then 7
+								WHEN type= 'hamlet' then 8
+								ELSE 1000
+							END AS index,
+						osm_id, name, type, (keyvalue->'is_in') AS is_in, geom
+					FROM place
+					WHERE name != ''
+					ORDER BY index;
+					
+					INSERT INTO geometry_columns(
+								f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type")
+					VALUES ('', 'public', 'place_lookup', 'geom', 2, 4326, 'POINT');
+			]]>
+		</dst_view_def>
+
+		<dst_view_def name="pofw_lookup">
+			<![CDATA[
+				CREATE VIEW pofw_lookup AS
+					SELECT CASE WHEN type='christian' then 1
+						WHEN type='christian_evangelical' then 2
+						WHEN type='christian_catholic' then 3
+						WHEN type='christan_protestant' then 4
+						WHEN type='christian_orthodox' then 5
+						WHEN type='christian_anglican' then 6
+						when type='christian_lutheran' then 7
+						WHEN type='christian_methodist' then 8
+						WHEN type='muslim' then 9
+						WHEN type='jewish' then 10
+						WHEN type='place_of_worship' then 11
+						ELSE 1000
+						END AS index,
+						osm_id, name, type, geom
+					FROM pofw
+					WHERE name!=''
+					ORDER BY index;
+					
+					INSERT INTO geometry_columns(
+								f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type")
+					VALUES ('', 'public', 'pofw_lookup', 'geom', 2, 4326, 'POINT');
+			]]>
+		</dst_view_def>
+
+		<dst_view_def name="poi_lookup">
+			<![CDATA[
+				CREATE VIEW poi_lookup AS
+					SELECT CASE WHEN type='bus_stop' then 1
+						WHEN type='terminal' then 2
+						WHEN type='hospital' then 3
+						WHEN type='viewpoint' then 4
+						WHEN type='university' then 5
+						WHEN type='school' then 6
+						WHEN type='kindergarten' then 7
+						WHEN type='parking' then 8
+						WHEN type='restaurant' then 9
+						WHEN type='fast_food' then 10
+						WHEN type='cafe' then 11
+						WHEN type='bank' then 12
+						WHEN type='hpost_office' then 13
+						WHEN type='cinema' then 14
+						ELSE 1000
+						END AS index,
+						osm_id, name, type, (poi.keyvalue->'url') AS url, geom				
+					FROM poi
+					WHERE name!=''
+					ORDER BY index;		
+
+					INSERT INTO geometry_columns(
+								f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type")
+					VALUES ('', 'public', 'poi_lookup', 'geom', 2, 4326, 'POINT');					
+			]]>
+		</dst_view_def>
+
+		<dst_view_def name="indoor_view">
+			<![CDATA[
+				CREATE VIEW indoor_view AS
+					SELECT 
+				        CASE
+				            WHEN indoor.type::text = 'indoor'::text THEN 1
+				            ELSE 1000
+				        END AS index, 
+				        indoor.osm_id, indoor.lastchange, indoor.name, indoor.description, indoor.level, indoor.website, indoor.wikipedia, indoor.image_url, indoor.video_url, indoor.audio_url, indoor.type, indoor.geom, building_indoor.osm_id AS building_osm_id, building_indoor.name AS building_name
+				  	FROM indoor
+				  	LEFT JOIN building_indoor_to_indoor ON indoor.id=building_indoor_to_indoor.indoor_id
+				  	LEFT JOIN building_indoor ON building_indoor_to_indoor.building_indoor_id=building_indoor.id
+				  	WHERE indoor.name::text <> ''::text
+				  	ORDER BY index;
+
+					INSERT INTO geometry_columns(
+								f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type")
+					VALUES ('', 'public', 'indoor_view', 'geom', 2, 4326, 'POINT');					
+			]]>
+		</dst_view_def>
+
+		<dst_view_def name="railwaystation_lookup">
+			<![CDATA[
+				CREATE VIEW railwaystation_lookup AS
+					SELECT CASE WHEN type='station' then 1
+						WHEN type='tram_stop' then 2
+						WHEN type='halt' then 3
+						ELSE 1000
+						END AS index,
+						osm_id, name, type, geom
+					FROM railwaystation
+					WHERE name!=''
+					ORDER BY index;
+					
+					INSERT INTO geometry_columns(
+								f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type")
+					VALUES ('', 'public', 'railwaystation_lookup', 'geom', 2, 4326, 'POINT');
+			]]>
+		</dst_view_def>
+
+		<dst_view_def name="road_lookup">
+			<![CDATA[
+				CREATE VIEW road_lookup AS
+					SELECT First_Select.osm_id, 
+					   First_Select.name, 
+					   First_Select.type, 
+					   road.geom 
+					FROM road, 
+					(SELECT CASE WHEN type='motorway' then 1 
+							 WHEN type='motorway_link' then 1 
+							 WHEN type='trunk' then 2 
+							 WHEN type='trunk_link' then 2 
+							 WHEN type='primary' then 3 
+							 WHEN type='primary_link' then 3 
+							 WHEN type='secondary' then 4 
+							 WHEN type='tertiary' then 5 
+							 WHEN type='road' then 6 
+							 WHEN type='unclassified' then 7 
+							 WHEN type='residential' then 8 
+							 WHEN type='living_street' then 9 
+							 WHEN type='service' then 10 
+							 ELSE 1000 
+									 END AS index, 
+									 MAX(osm_id) AS osm_id, name, type
+					FROM road 
+					WHERE name!='' 
+					GROUP BY name, type) as First_Select 
+					WHERE First_Select.osm_id = road.osm_id 
+					ORDER BY index;
+					
+					INSERT INTO geometry_columns(
+								f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type")
+					VALUES ('', 'public', 'road_lookup', 'geom', 2, 4326, 'LINESTRING');
+			]]>
+		</dst_view_def>
+
+		<dst_view_def name="water_lookup">
+			<![CDATA[
+				CREATE VIEW water_lookup AS
+					SELECT First_Select.osm_id, 
+					   First_Select.name, 
+					   First_Select.type, 
+					   water.geom
+					FROM water,
+						(SELECT case WHEN type='water' then 1
+							 WHEN type='reservoir' then 2
+							 ELSE 1000
+							 END AS index,
+							 MAX(osm_id) AS osm_id, name, type
+					FROM water
+					WHERE name!=''
+					GROUP BY name, type) as First_Select
+					WHERE First_Select.osm_id = water.osm_id 
+					ORDER BY index;
+					
+					INSERT INTO geometry_columns(
+								f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type")
+					VALUES ('', 'public', 'water_lookup', 'geom', 2, 4326, 'MULTIPOLYGON');					
+			]]>
+		</dst_view_def>
+
+		<dst_view_def name="waterway_lookup">
+			<![CDATA[
+				CREATE VIEW waterway_lookup AS
+					SELECT First_Select.osm_id, 
+					   First_Select.name, 
+					   First_Select.type, 
+					   waterway.geom
+					FROM waterway,
+					(SELECT case WHEN type='river' then 1
+							 WHEN type='stream' then 2
+							 WHEN type='canal' then 3
+							 WHEN type='drain' then 4
+							 ELSE 1000
+							 END AS index,
+							 MAX(osm_id) AS osm_id, name, type
+					FROM waterway
+					WHERE name!=''
+					GROUP BY name, type) as First_Select 
+					WHERE First_Select.osm_id = waterway.osm_id 
+					ORDER BY index;
+
+					INSERT INTO geometry_columns(
+								f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type")
+					VALUES ('', 'public', 'waterway_lookup', 'geom', 2, 4326, 'LINESTRING');
+			]]>
+		</dst_view_def>
+
+	</dst_schema_def>
+	<src_to_dst_mappings>
+
+		<!-- PLACE -->
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="place" v="region" />
+			</and_ed_conditions>
+			<dst_table name="place" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="region" />
+				<column name="name" value="%tag_name%" />
+				<column name="population" value="%tag_population%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="place" v="state" />
+			</and_ed_conditions>
+			<dst_table name="place" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="state" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="population" value="%tag_population%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="place" v="country" />
+			</and_ed_conditions>
+			<dst_table name="place" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="country" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="population" value="%tag_population%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="place" v="town" />
+			</and_ed_conditions>
+			<dst_table name="place" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="town" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="population" value="%tag_population%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="place" v="city" />
+			</and_ed_conditions>
+			<dst_table name="place" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="city" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="population" value="%tag_population%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="place" v="village" />
+			</and_ed_conditions>
+			<dst_table name="place" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="village" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="population" value="%tag_population%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="place" v="hamlet" />
+			</and_ed_conditions>
+			<dst_table name="place" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="hamlet" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="population" value="%tag_population%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="place" v="suburb" />
+			</and_ed_conditions>
+			<dst_table name="place" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="suburb" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="population" value="%tag_population%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="place" v="island" />
+			</and_ed_conditions>
+			<dst_table name="place" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="island" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="population" value="%tag_population%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<!-- POI -->
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="railway" v="level_crossing" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="level_crossing" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="tourism" v="viewpoint" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="viewpoint" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="power" v="generator" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="generator" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="aeroway" v="helipad" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="helipad" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="aeroway" v="terminal" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="terminal" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="police" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="police" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="fire_station" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="fire_station" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="recycling" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="recycling" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="post_box" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="post_box" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="post_office" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="post_office" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="telephone" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="telephone" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="library" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="library" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="town_hall" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="town_hall" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="courthouse" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="courthouse" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="prison" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="prison" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="university" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="university" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="school" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="school" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="kindergarten" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="kindergarten" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="pharmacy" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="pharmacy" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="hospital" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="hospital" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="theatre" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="theatre" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="nightclub" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="nightclub" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="cinema" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="cinema" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="restaurant" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="restaurant" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="fast_food" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="fast_food" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="cafe" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="cafe" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="pub" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="pub" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="hotel" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="hotel" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="motel" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="motel" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="bed_and_breakfast" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="bed_and_breakfast" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="shop" v="supermarket" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="supermarket" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="bakery" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="bakery" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="kiosk" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="kiosk" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="bank" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="bank" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="atm" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="atm" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="tourist_info" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="tourist_info" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="attraction" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="attraction" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="museum" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="museum" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="fuel" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="fuel" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="service" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="service" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="bus_station" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="bus_station" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="highway" v="bus_stop" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="bus_station" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="parking" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="parking" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="bus_stop" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="bus_stop" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="toilets" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="toilets" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="shop" v="beverages" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="shop_beverages" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<!-- INDOOR -->
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="indoor" v="yes" />
+			</and_ed_conditions>
+			<dst_table name="indoor" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="indoor" />
+				<column name="name" value="%tag_name%" />
+				<column name="description" value="%tag_description%" />
+				<column name="level" value="%tag_level%" />
+				<column name="website" value="%tag_website%" />
+				<column name="wikipedia" value="%tag_wikipedia%" />
+				<column name="image_url" value="%tag_image_url%" />
+				<column name="video_url" value="%tag_video_url%" />
+				<column name="audio_url" value="%tag_audio_url%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<mapping type="relation">
+			<and_ed_conditions>
+				<tag k="type" v="building" />
+				<!-- <tag k="building" v="yes" />  -->
+			</and_ed_conditions>
+			<dst_table name="building_indoor" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="building" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+			</dst_columns>
+			<members all_required="false">
+				<related_table name="indoor">
+					<join_table name="building_indoor_to_indoor" />
+					<join_table_columns>
+						<column name="building_indoor_id" value="%db_relation_id%" />
+						<column name="indoor_id" value="%db_member_id%" />
+						<column name="role" value="%member_role%" />
+					</join_table_columns>
+				</related_table>
+			</members>
+		</mapping>
+
+		<!-- POFW -->
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="place_of_worship" />
+			</and_ed_conditions>
+			<dst_table name="pofw" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="place_of_worship" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="place_of_worship" />
+				<tag k="religion" v="christian" />
+			</and_ed_conditions>
+			<dst_table name="pofw" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="christian" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="place_of_worship" />
+				<tag k="religion" v="christian" />
+				<tag k="denomination" v="anglican" />
+			</and_ed_conditions>
+			<dst_table name="pofw" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="christian_anglican" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="place_of_worship" />
+				<tag k="religion" v="christian" />
+				<tag k="denomination" v="catholic" />
+			</and_ed_conditions>
+			<dst_table name="pofw" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="christian_catholic" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="place_of_worship" />
+				<tag k="religion" v="christian" />
+				<tag k="denomination" v="evangelical" />
+			</and_ed_conditions>
+			<dst_table name="pofw" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="christian_evangelical" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="place_of_worship" />
+				<tag k="religion" v="christian" />
+				<tag k="denomination" v="lutheran" />
+			</and_ed_conditions>
+			<dst_table name="pofw" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="christian_lutheran" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="place_of_worship" />
+				<tag k="religion" v="christian" />
+				<tag k="denomination" v="methodist" />
+			</and_ed_conditions>
+			<dst_table name="pofw" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="christian_methodist" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="place_of_worship" />
+				<tag k="religion" v="christian" />
+				<tag k="denomination" v="orthodox" />
+			</and_ed_conditions>
+			<dst_table name="pofw" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="christian_orthodox" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="place_of_worship" />
+				<tag k="religion" v="christian" />
+				<tag k="denomination" v="protestant" />
+			</and_ed_conditions>
+			<dst_table name="pofw" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="christian_protestant" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="place_of_worship" />
+				<tag k="religion" v="jewish" />
+			</and_ed_conditions>
+			<dst_table name="pofw" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="jewish" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="place_of_worship" />
+				<tag k="religion" v="muslim" />
+			</and_ed_conditions>
+			<dst_table name="pofw" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="muslim" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<!-- RAILWAYSTATION -->
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="railway" v="station" />
+			</and_ed_conditions>
+			<dst_table name="railwaystation" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="station" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="railway" v="halt" />
+			</and_ed_conditions>
+			<dst_table name="railwaystation" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="halt" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="railway" v="tram_stop" />
+			</and_ed_conditions>
+			<dst_table name="railwaystation" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="tram_stop" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<!-- RAILWAY -->
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="railway" v="rail" />
+			</and_ed_conditions>
+			<dst_table name="railway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="rail" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="railway" v="light_rail" />
+			</and_ed_conditions>
+			<dst_table name="railway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="light_rail" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="railway" v="subway" />
+			</and_ed_conditions>
+			<dst_table name="railway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="subway" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="railway" v="tram" />
+			</and_ed_conditions>
+			<dst_table name="railway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="tram" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="railway" v="monorail" />
+			</and_ed_conditions>
+			<dst_table name="railway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="monorail" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="railway" v="preserved" />
+			</and_ed_conditions>
+			<dst_table name="railway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="preserved" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<!-- BOUNDARY -->
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="boundary" v="administrative" />
+				<tag k="admin_level" v="1" />
+			</and_ed_conditions>
+			<dst_table name="boundary" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="admin_level1" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="boundary" v="administrative" />
+				<tag k="admin_level" v="2" />
+			</and_ed_conditions>
+			<dst_table name="boundary" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="admin_level2" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="boundary" v="administrative" />
+				<tag k="admin_level" v="3" />
+			</and_ed_conditions>
+			<dst_table name="boundary" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="admin_level3" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="boundary" v="administrative" />
+				<tag k="admin_level" v="4" />
+			</and_ed_conditions>
+			<dst_table name="boundary" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="admin_level4" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="boundary" v="administrative" />
+				<tag k="admin_level" v="5" />
+			</and_ed_conditions>
+			<dst_table name="boundary" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="admin_level5" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="boundary" v="administrative" />
+				<tag k="admin_level" v="6" />
+			</and_ed_conditions>
+			<dst_table name="boundary" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="admin_level6" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="boundary" v="administrative" />
+				<tag k="admin_level" v="7" />
+			</and_ed_conditions>
+			<dst_table name="boundary" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="admin_level7" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="boundary" v="administrative" />
+				<tag k="admin_level" v="8" />
+			</and_ed_conditions>
+			<dst_table name="boundary" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="admin_level8" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="boundary" v="administrative" />
+				<tag k="admin_level" v="9" />
+			</and_ed_conditions>
+			<dst_table name="boundary" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="admin_level9" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="type" v="boundary" />
+			</and_ed_conditions>
+			<dst_table name="boundary_multipolygon" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_admin_level%" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<!-- ROAD -->
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="aeroway" v="runway" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="runway" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="aeroway" v="taxiway" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="taxiway" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="motorway" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="motorway" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="trunk" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="trunk" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="primary" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="primary" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="secondary" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="secondary" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="tertiary" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="tertiary" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="unclassified" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="unclassified" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="residential" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="residential" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="living_street" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="living_street" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="pedestrian" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="pedestrian" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="motorway_link" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="motorway_link" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="trunk_link" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="trunk_link" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="primary_link" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="primary_link" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="secondary_link" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="secondary_link" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="service" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="service" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="track" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="track" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="bridleway" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="bridleway" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="cicleway" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="cicleway" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="footway" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="footway" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="steps" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="steps" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="road" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="road" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="path" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="path" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="unsurfaced" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="unsurfaced" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="byway" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="byway" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="highway" v="cycleway" />
+			</and_ed_conditions>
+			<dst_table name="road" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="cycleway" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="oneway" value="%tag_oneway%" />
+				<column name="maxspeed" value="%tag_maxspeed%" />
+				<column name="superposition" value="%tag_superposition%" />
+				<column name="layer" value="%tag_layer%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<!-- WATERWAY -->
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="waterway" v="river" />
+			</and_ed_conditions>
+			<dst_table name="waterway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="river" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="width" value="%tag_width%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="waterway" v="stream" />
+			</and_ed_conditions>
+			<dst_table name="waterway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="stream" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="width" value="%tag_width%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="waterway" v="canal" />
+			</and_ed_conditions>
+			<dst_table name="waterway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="canal" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="width" value="%tag_width%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="waterway" v="drain" />
+			</and_ed_conditions>
+			<dst_table name="waterway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="drain" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="width" value="%tag_width%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<!-- COASTLINE -->
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="natural" v="coastline" />
+			</and_ed_conditions>
+			<dst_table name="coastline" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="coastline" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<!-- LANDUSE -->
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="place" v="island" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="island" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="natural" v="glacier" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="glacier" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="vineyard" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="vineyard" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="commercial" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="commercial" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="surface" v="grass" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="grass" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="grass" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="grass" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="tourism" v="zoo" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="zoo" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="sport" v="tennis" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="tennis" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="leisure" v="pitch" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="pitch" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="leisure" v="stadium" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="stadium" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="amenity" v="parking" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="parking" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="village_green" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="village_green" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="aeroway" v="apron" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="apron" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="aeroway" v="helipad" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="helipad" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="forest" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="forest" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="leisure" v="park" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="park" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="residential" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="residential_area" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="industrial" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="industrial" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="farm" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="farm" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="farmyard" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="farmyard" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="farmland" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="farmland" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="cemetery" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="cemetery" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="allotments" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="allotments" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="natural" v="wood" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="forest" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="wood" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="forest" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="meadow" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="meadow" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="quarry" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="quarry" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="piste" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="piste" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="recreation_ground" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="recreation_ground" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="military" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="military" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="orchard" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="orchard" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="greenfield" />
+			</and_ed_conditions>
+			<dst_table name="landuse" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="greenfield" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<!-- WATER -->
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="natural" v="water" />
+			</and_ed_conditions>
+			<dst_table name="water" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="water" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="reservoir" />
+			</and_ed_conditions>
+			<dst_table name="water" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="reservoir" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="landuse" v="basin" />
+			</and_ed_conditions>
+			<dst_table name="water" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="basin" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<!-- BUILDING -->
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="building" v="yes" />
+			</and_ed_conditions>
+			<dst_table name="building" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="building" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="aeroway" v="terminal" />
+			</and_ed_conditions>
+			<dst_table name="building" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="terminal" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="amenity" v="university" />
+			</and_ed_conditions>
+			<dst_table name="building" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="university" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping type="linestring">
+			<and_ed_conditions>
+				<tag k="building" v="university" />
+			</and_ed_conditions>
+			<dst_table name="building" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="university" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<!-- TRAINROUTE -->
+		<mapping type="relation">
+			<and_ed_conditions>
+				<tag k="type" v="route" />
+				<tag k="route" v="train" />
+			</and_ed_conditions>
+			<dst_table name="trainroute" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_railway%" />
+				<column name="name" value="%tag_name%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="route" value="%tag_route%" />
+				<column name="network" value="%tag_network%" />
+				<column name="operator" value="%tag_operator%" />
+			</dst_columns>
+			<members all_required="false">
+				<related_table name="railway">
+					<join_table name="trainroute_to_railway" />
+					<join_table_columns>
+						<column name="trainroute_id" value="%db_relation_id%" />
+						<column name="railway_id" value="%db_member_id%" />
+					</join_table_columns>
+				</related_table>
+				<related_table name="railwaystation">
+					<join_table name="trainroute_to_railwaystation" />
+					<join_table_columns>
+						<column name="trainroute_id" value="%db_relation_id%" />
+						<column name="railwaystation_id" value="%db_member_id%" />
+						<column name="role" value="%member_role%" />
+					</join_table_columns>
+				</related_table>
+			</members>
+		</mapping>
+		<mapping type="relation">
+			<and_ed_conditions>
+				<tag k="type" v="route" />
+				<tag k="route" v="light_rail" />
+			</and_ed_conditions>
+			<dst_table name="trainroute" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_railway%" />
+				<column name="name" value="%tag_name%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="route" value="%tag_route%" />
+				<column name="network" value="%tag_network%" />
+				<column name="operator" value="%tag_operator%" />
+			</dst_columns>
+			<members all_required="false">
+				<related_table name="railway">
+					<join_table name="trainroute_to_railway" />
+					<join_table_columns>
+						<column name="trainroute_id" value="%db_relation_id%" />
+						<column name="railway_id" value="%db_member_id%" />
+					</join_table_columns>
+				</related_table>
+				<related_table name="railwaystation">
+					<join_table name="trainroute_to_railwaystation" />
+					<join_table_columns>
+						<column name="trainroute_id" value="%db_relation_id%" />
+						<column name="railwaystation_id" value="%db_member_id%" />
+						<column name="role" value="%member_role%" />
+					</join_table_columns>
+				</related_table>
+			</members>
+		</mapping>
+
+		<!-- ROUTE -->
+		<mapping type="relation">
+			<and_ed_conditions>
+				<tag k="type" v="route" />
+			</and_ed_conditions>
+			<dst_table name="route" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_type%" />
+				<column name="network" value="%tag_network%" />
+				<column name="route" value="%tag_route%" />
+				<column name="name" value="%tag_name%" />
+				<column name="ref" value="%tag_ref%" />
+				<column name="keyvalue" value="%tags_all%" />
+			</dst_columns>
+			<members all_required="false">
+				<related_table name="road">
+					<join_table name="route_to_road" />
+					<join_table_columns>
+						<column name="route_id" value="%db_relation_id%" />
+						<column name="road_id" value="%db_member_id%" />
+						<column name="role" value="%member_role%" />
+					</join_table_columns>
+				</related_table>
+			</members>
+		</mapping>
+		
+		<!-- NETWORK -->
+		<mapping type="relation">
+			<and_ed_conditions>
+				<tag k="type" v="network" />
+			</and_ed_conditions>
+			<dst_table name="network" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_type%" />
+				<column name="operator" value="%tag_operator%" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+			</dst_columns>
+			<members all_required="false">
+				<related_table name="route">
+					<join_table name="network_to_route" />
+					<join_table_columns>
+						<column name="network_id" value="%db_relation_id%" />
+						<column name="route_id" value="%db_member_id%" />
+						<column name="role" value="%member_role%" />
+					</join_table_columns>
+				</related_table>
+				<related_table name="trainroute">
+					<join_table name="network_to_trainroute" />
+					<join_table_columns>
+						<column name="network_id" value="%db_relation_id%" />
+						<column name="trainroute_id" value="%db_member_id%" />
+						<column name="role" value="%member_role%" />
+					</join_table_columns>
+				</related_table>
+			</members>
+		</mapping>
+	</src_to_dst_mappings>
+</schema_def_and_mapping>

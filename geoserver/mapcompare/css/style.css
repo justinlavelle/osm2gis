@@ -1,0 +1,87 @@
+@charset "utf-8";
+/* CSS Document */
+html
+{
+	height: 100%;
+	width: 100%;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+	margin-bottom:0px;
+}
+div {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;	
+}
+
+#header {
+	position: relative;
+	width: 100%;
+	margin-bottom:10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#title {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:17px;
+	font-weight:bold;
+}
+
+#osmlogo {
+	padding-right:20px;
+}
+
+#sliderWrap {
+	background:#FFFFFF;
+	margin: 0 0;
+	width: 50px;
+	height: 100%;
+}
+
+#slider {
+	position: absolute;
+	width: 150px;
+/*	height: 100%;*/
+	margin-top: -150px;
+	left: -282px;
+	top: 129px;
+}
+
+.cr {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:9px;
+	padding-top:4px
+}
+
+#slider img {
+	border: 0;
+}
+
+#sliderContent {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin: 21px 0 0 130px;
+	position: absolute;
+	vertical-align:top;
+	horizontal-align:left;
+	border-top: none;
+	border-right: 1px solid #808986;
+	border-top: 1px solid #808986;
+	border-bottom: 1px solid #808986;
+	left: -97px;
+	top: 75px;
+	width: 247px;
+/*	height: 100%;*/
+	z-index: 10000;
+}
+
+#openCloseWrap {
+	position:absolute;
+	margin: 160px 0 0 120px;
+	left: 145px;
+	top: -64px;
+	width: 16px;
+	height: 16px;
+	z-index: 10000;
+}

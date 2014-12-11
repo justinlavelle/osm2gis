@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osmChange version='0.6'>
+	<modify>
+		<node id='1'  lat='2' lon='1' />
+		<node id='2'  lat='4' lon='3' />
+		<node id='3'  lat='6' lon='5' />
+	</modify>
+  
+	<modify>
+		<way id='7' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438'>
+			<nd ref='3' />
+			<nd ref='2' />
+			<nd ref='1' />
+			<tag k='highway' v='motorway' />
+			<tag k='name' v='Testway2' />
+		</way>
+	</modify>
+</osmChange>

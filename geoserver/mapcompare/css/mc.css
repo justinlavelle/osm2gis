@@ -1,0 +1,67 @@
+/*
+ *  Geofabrik Tools
+ *
+ *  mc/mc.css
+ *
+ */
+
+td.maps {
+    vertical-align: top;
+    width: 50%;
+    padding: 0px 5px;
+}
+
+form.switch {
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+form.switch select {
+    width: 12em;
+}
+
+div.map {
+    border: 1px solid #808080;
+    width: 100%;
+    height: 400px;
+}
+
+div#customMousePosition {
+    position: absolute;
+    bottom: 22px;
+    padding: 6px 8px;
+    right: 8px;
+    font-size: 80%;
+    z-index: 1000;
+}
+ 
+div#bottom {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    z-index: 1000;
+}
+
+div#map-decoration {
+    position: absolute;
+    bottom: 8px;
+    right: 0px;
+    z-index: 1000;
+}
+
+div#map-decoration span {
+    padding-right: 10px;
+    font-size: small;
+    z-index: 1000;
+}
+
+div#map-rights {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+    position: absolute;
+    bottom: 4px;
+    left: 0px;
+	width:100%;
+	text-align:center;
+    z-index: 1000;
+}

@@ -1,0 +1,611 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <bounds minlat='47.2224682' minlon='8.81552517' maxlat='47.2239182' maxlon='8.81892622' origin='CGImap 0.0.2' />
+  <node id='411747940' timestamp='2010-03-31T15:04:48Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2237601' lon='8.8157276'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.108' />
+    <tag k='name' v='6.108' />
+  </node>
+  <node id='411747942' timestamp='2010-03-31T15:04:48Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2237331' lon='8.8157267'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.110' />
+    <tag k='name' v='6.110' />
+  </node>
+  <node id='411747986' timestamp='2010-03-31T15:04:48Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2234777' lon='8.8160804'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.102' />
+    <tag k='name' v='6.102' />
+  </node>
+  <node id='411747989' timestamp='2010-03-31T15:04:48Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2234782' lon='8.816042'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.101' />
+    <tag k='name' v='6.101' />
+  </node>
+  <node id='411747992' timestamp='2010-03-31T15:04:48Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2235266' lon='8.8161041'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.153' />
+    <tag k='name' v='6.153' />
+  </node>
+  <node id='411748001' timestamp='2010-03-31T15:04:48Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.223562' lon='8.8160857'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.154' />
+    <tag k='name' v='6.154' />
+  </node>
+  <node id='411748004' timestamp='2010-03-31T15:04:48Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2235616' lon='8.8161613'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.151' />
+    <tag k='name' v='6.151' />
+  </node>
+  <node id='411747971' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2236672' lon='8.8160148'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.113' />
+    <tag k='name' v='6.113' />
+  </node>
+  <node id='411747975' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2236608' lon='8.8161'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.104' />
+    <tag k='name' v='6.104' />
+  </node>
+  <node id='411747998' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.223539' lon='8.816124'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.152' />
+    <tag k='name' v='6.152' />
+  </node>
+  <node id='411747995' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2235464' lon='8.816065'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.170' />
+    <tag k='name' v='6.170' />
+  </node>
+  <node id='411747978' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2235774' lon='8.8162042'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.104 second door' />
+    <tag k='name' v='6.104 second door' />
+  </node>
+  <node id='411747982' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2235491' lon='8.8162025'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.103' />
+    <tag k='name' v='6.103' />
+  </node>
+  <node id='411747954' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2237415' lon='8.8159215'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.112' />
+    <tag k='name' v='6.112' />
+  </node>
+  <node id='411747957' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2237449' lon='8.8159941'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.106' />
+    <tag k='name' v='6.106' />
+  </node>
+  <node id='411747950' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2237789' lon='8.8158749'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.111' />
+    <tag k='name' v='6.111' />
+  </node>
+  <node id='411747944' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2238313' lon='8.8158492'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.108 second door' />
+    <tag k='name' v='6.108 second door' />
+  </node>
+  <node id='411747947' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2238284' lon='8.8158898'>
+    <tag k='level' v='1' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 6.107' />
+    <tag k='name' v='6.107' />
+  </node>
+  <node id='411045457' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2226477' lon='8.8178283'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 3.010, second door' />
+    <tag k='name' v='3.010_right_door' />
+  </node>
+  <node id='411045438' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2226393' lon='8.8178397'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 3.011, first door' />
+    <tag k='name' v='3.011_left_door' />
+  </node>
+  <node id='411045432' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2227803' lon='8.8175552'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 3.003' />
+    <tag k='name' v='3.003' />
+  </node>
+  <node id='411045461' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2227239' lon='8.8177229'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 3.010, first door' />
+    <tag k='name' v='3.010_left_door' />
+  </node>
+  <node id='411045419' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2228194' lon='8.8176605'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Entrance to building 3' />
+    <tag k='name' v='Entrance_building_3' />
+  </node>
+  <node id='411045433' timestamp='2010-03-31T15:04:50Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2227664' lon='8.817574'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 3.004' />
+    <tag k='name' v='3.004' />
+  </node>
+  <node id='411045434' timestamp='2010-03-31T15:04:49Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2227447' lon='8.8176012'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 3.005' />
+    <tag k='name' v='3.005' />
+  </node>
+  <node id='411045431' timestamp='2010-03-31T15:04:50Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2228011' lon='8.8175795'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 3.002' />
+    <tag k='name' v='3.002' />
+  </node>
+  <node id='411729165' timestamp='2010-03-31T15:04:50Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2229966' lon='8.8176641'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.257' />
+    <tag k='name' v='1.257' />
+  </node>
+  <node id='411729167' timestamp='2010-03-31T15:04:50Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2229326' lon='8.8177434'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.255' />
+    <tag k='name' v='1.255' />
+  </node>
+  <node id='411729168' timestamp='2010-03-31T15:04:50Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2229362' lon='8.8177723'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.253' />
+    <tag k='name' v='1.253' />
+  </node>
+  <node id='411729169' timestamp='2010-03-31T15:04:50Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2229731' lon='8.8177957'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.251' />
+    <tag k='name' v='1.251' />
+  </node>
+  <node id='411729159' timestamp='2010-03-31T15:04:50Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2231246' lon='8.8175118'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.261' />
+    <tag k='name' v='1.261' />
+  </node>
+  <node id='411729153' timestamp='2010-03-31T15:04:50Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2232364' lon='8.8174685'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.254' />
+    <tag k='name' v='1.254' />
+  </node>
+  <node id='411729151' timestamp='2010-03-31T15:04:50Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2232544' lon='8.8173576'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.265' />
+    <tag k='name' v='1.265' />
+  </node>
+  <node id='411729155' timestamp='2010-03-31T15:04:50Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2231895' lon='8.817436'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.263' />
+    <tag k='name' v='1.263' />
+  </node>
+  <node id='411729147' timestamp='2010-03-31T15:04:50Z' uid='254788' user='ageiter' visible='true' version='5' lat='47.2233319' lon='8.8173545'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.256' />
+    <tag k='name' v='1.256' />
+  </node>
+  <node id='411729149' timestamp='2010-03-31T15:04:50Z' uid='254788' user='ageiter' visible='true' version='5' lat='47.2232497' lon='8.8174493'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.256a' />
+    <tag k='name' v='1.256a' />
+  </node>
+  <node id='411729145' timestamp='2010-03-31T15:04:50Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2233184' lon='8.8172819'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='website' v='http://ifs.hsr.ch/' />
+    <tag k='video_url' v='http://www.youtube.com/watch?v=OF5tKdZiveE' />
+    <tag k='image_url' v='http://www.architekturforum-obersee.ch/Bilddaten/Postkarte/Hochschule%20Rapperswil.jpg' />
+    <tag k='description' v='Classroom 1.267' />
+    <tag k='name' v='1.267' />
+    <tag k='wikipedia' v='http://wiki.hsr.ch/' />
+    <tag k='audio_url' v='http://www.mp3.ch/no_cache/music/download/sid/2064/?tx_musicgate_pi1%5Bgo%5D=download&amp;plus=&amp;next=' />
+  </node>
+  <node id='417761186' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2231606' lon='8.8177264'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Server Room 1.250 via Room 1.212a' />
+    <tag k='name' v='1.250_via_1.212a' />
+  </node>
+  <node id='417761187' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.223152' lon='8.8177143'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Server Room 1.250 via Room 1.252' />
+    <tag k='name' v='1.250_via_1.252' />
+  </node>
+  <node id='411729157' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2231544' lon='8.817564'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.254a' />
+    <tag k='name' v='1.254a' />
+  </node>
+  <node id='411729171' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2230254' lon='8.8178913'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.227' />
+    <tag k='name' v='1.227' />
+  </node>
+  <node id='411729160' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2230606' lon='8.8175893'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.259' />
+    <tag k='name' v='1.259' />
+  </node>
+  <node id='411729162' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='5' lat='47.2230899' lon='8.8176412'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.252' />
+    <tag k='name' v='1.252' />
+  </node>
+  <node id='411729103' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2231634' lon='8.8178652'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.212a' />
+    <tag k='name' v='1.212a' />
+  </node>
+  <node id='411729091' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.223332' lon='8.817738'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.215' />
+    <tag k='name' v='1.215' />
+  </node>
+  <node id='411729093' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2232688' lon='8.8178165'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.217' />
+    <tag k='name' v='1.217' />
+  </node>
+  <node id='411729095' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2232039' lon='8.8178913'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.219' />
+    <tag k='name' v='1.219' />
+  </node>
+  <node id='411729164' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='5' lat='47.2231977' lon='8.8176807'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Server Room 1.250 via Room 1.208' />
+    <tag k='name' v='1.250_via_1.208' />
+  </node>
+  <node id='411729109' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2233563' lon='8.8176362'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.206' />
+    <tag k='name' v='1.206' />
+  </node>
+  <node id='411729107' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2233374' lon='8.8176569'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.208a' />
+    <tag k='name' v='1.208a' />
+  </node>
+  <node id='411729105' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='5' lat='47.2232619' lon='8.8177499'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.208' />
+    <tag k='name' v='1.208' />
+  </node>
+  <node id='411045449' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.222572' lon='8.8180682'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 3.019' />
+    <tag k='name' v='3.019' />
+  </node>
+  <node id='411045442' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2226482' lon='8.8180375'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 3.000d' />
+    <tag k='name' v='3.000d' />
+  </node>
+  <node id='411045447' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2225893' lon='8.8180618'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 3.020' />
+    <tag k='name' v='3.020' />
+  </node>
+  <node id='411045436' timestamp='2010-03-31T15:04:51Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2225923' lon='8.8179604'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Refreshing room 3.012' />
+    <tag k='name' v='3.012' />
+  </node>
+  <node id='411045429' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.222591' lon='8.817906'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 3.011, second door' />
+    <tag k='name' v='3.011_right_door' />
+  </node>
+  <node id='411045446' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2225804' lon='8.8180845'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 3.018' />
+    <tag k='name' v='3.018' />
+  </node>
+  <node id='411045451' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2226071' lon='8.8181108'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 3.017' />
+    <tag k='name' v='3.017_via_3.000d' />
+  </node>
+  <node id='411045455' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2226334' lon='8.8180761'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Accessdoor for room 3.016 via room 3.000d' />
+    <tag k='name' v='3.016_via_3.000d' />
+  </node>
+  <node id='411045508' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2226467' lon='8.8181805'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 3.017' />
+    <tag k='name' v='3.017_via_3.016' />
+  </node>
+  <node id='411045496' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2227635' lon='8.8180331'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Accessdoor for room 3.013 via room 3.014' />
+    <tag k='name' v='3.013_via_3.014' />
+  </node>
+  <node id='411045440' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.222712' lon='8.8179747'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Accessdoor for room 3.013 via room 3.011' />
+    <tag k='name' v='3.013_via_3.011' />
+  </node>
+  <node id='411045475' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2227897' lon='8.8180217'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 3.014' />
+    <tag k='name' v='3.014_via_3.008' />
+  </node>
+  <node id='411045466' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2227249' lon='8.8179525'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Accessdoor for room 3.013 via room 3.010' />
+    <tag k='name' v='3.013_via_3.010' />
+  </node>
+  <node id='411045469' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2227536' lon='8.817949'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Accessdoor for room 3.013 via room 3.008' />
+    <tag k='name' v='3.013_via_3.008' />
+  </node>
+  <node id='411045500' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2227105' lon='8.8181083'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 3.015' />
+    <tag k='name' v='3.015' />
+  </node>
+  <node id='411045503' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2226764' lon='8.818138'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Accessdoor for room 3.016 via room 3.013' />
+    <tag k='name' v='3.016_via_3.013' />
+  </node>
+  <node id='411045424' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2228949' lon='8.818032'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 3.007' />
+    <tag k='name' v='3.007' />
+  </node>
+  <node id='411045423' timestamp='2010-03-31T15:04:52Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2228559' lon='8.8179578'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 3.008' />
+    <tag k='name' v='3.008' />
+  </node>
+  <node id='411045425' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2229238' lon='8.8180082'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Refreshing room 3.006' />
+    <tag k='name' v='3.006' />
+  </node>
+  <node id='411729097' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2231841' lon='8.8179129'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.221' />
+    <tag k='name' v='1.221' />
+  </node>
+  <node id='411729099' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2231156' lon='8.8180004'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.223' />
+    <tag k='name' v='1.223' />
+  </node>
+  <node id='411729100' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2230949' lon='8.8180058'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.225' />
+    <tag k='name' v='1.225' />
+  </node>
+  <node id='411729101' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2231129' lon='8.8179237'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.212' />
+    <tag k='name' v='1.212' />
+  </node>
+  <node id='475572473' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2236208' lon='8.8166628'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 5.001, via the left door' />
+    <tag k='name' v='5.001_left_door' />
+  </node>
+  <node id='475572478' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2236601' lon='8.8167305'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 5.001, via the right door' />
+    <tag k='name' v='5.001_right_door' />
+  </node>
+  <node id='411729129' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2235123' lon='8.817052'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.273' />
+    <tag k='name' v='1.273' />
+  </node>
+  <node id='411729134' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2233833' lon='8.817207'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='website' v='http://www.hsr.ch/' />
+    <tag k='video_url' v='http://www.youtube.com/watch?v=aR3S0HvDpA0' />
+    <tag k='image_url' v='http://www.g-f-a.ch/img/intro_6.jpg' />
+    <tag k='description' v='Classroom 1.269' />
+    <tag k='name' v='1.269' />
+    <tag k='wikipedia' v='http://de.wikipedia.org/wiki/Hochschule_f%C3%BCr_Technik_Rapperswil' />
+  </node>
+  <node id='411729132' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2234492' lon='8.8171295'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.271' />
+    <tag k='name' v='1.271' />
+  </node>
+  <node id='411729131' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2235438' lon='8.8171034'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.262' />
+    <tag k='name' v='1.262' />
+  </node>
+  <node id='411729124' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2236268' lon='8.8171358'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.279' />
+    <tag k='name' v='1.279' />
+  </node>
+  <node id='411729126' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2235636' lon='8.817015'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.277' />
+    <tag k='name' v='1.277' />
+  </node>
+  <node id='411729127' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.223542' lon='8.8170213'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.275' />
+    <tag k='name' v='1.275' />
+  </node>
+  <node id='475572474' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2237028' lon='8.8168009'>
+    <tag k='level' v='0' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Room 5.002, via the left door' />
+    <tag k='name' v='5.002_left_door' />
+  </node>
+  <node id='411729141' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2233969' lon='8.8172783'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='website' v='http://wiki.hsr.ch/StefanKeller/wiki.cgi?IndoorGuide4Android2' />
+    <tag k='video_url' v='http://www.youtube.com/watch?v=OSQlsLzK4qs&amp;NR=1' />
+    <tag k='image_url' v='http://upload.wikimedia.org/wikipedia/commons/8/86/HSR_See_Geb6.jpg' />
+    <tag k='description' v='Classroom 1.258' />
+    <tag k='name' v='1.258' />
+    <tag k='audio_url' v='http://www.mp3.ch/no_cache/music/download/sid/2063/?tx_musicgate_pi1%5Bgo%5D=download&amp;plus=&amp;next=' />
+  </node>
+  <node id='417761184' timestamp='2010-03-31T15:04:53Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2234713' lon='8.8173722'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Server Room 1.200 via Room 1.262' />
+    <tag k='name' v='1.200_via_1.258' />
+  </node>
+  <node id='417761183' timestamp='2010-03-31T15:04:54Z' uid='254788' user='ageiter' visible='true' version='3' lat='47.2234916' lon='8.8173068'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Server Room 1.200 via Room 1.262' />
+    <tag k='name' v='1.200_via_1.262' />
+  </node>
+  <node id='411729139' timestamp='2010-03-31T15:04:54Z' uid='254788' user='ageiter' visible='true' version='5' lat='47.2234979' lon='8.817319'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Server Room 1.200 via Room 1.202' />
+    <tag k='name' v='1.200_via_1.202' />
+  </node>
+  <node id='411729111' timestamp='2010-03-31T15:04:54Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2234338' lon='8.8175406'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.206a' />
+    <tag k='name' v='1.206a' />
+  </node>
+  <node id='411729115' timestamp='2010-03-31T15:04:54Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2234825' lon='8.8174847'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.204a' />
+    <tag k='name' v='1.204a' />
+  </node>
+  <node id='411729113' timestamp='2010-03-31T15:04:54Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2234528' lon='8.8175199'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.204' />
+    <tag k='name' v='1.204' />
+  </node>
+  <node id='411729083' timestamp='2010-03-31T15:04:54Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2236178' lon='8.8173948'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.207' />
+    <tag k='name' v='1.207' />
+  </node>
+  <node id='411729086' timestamp='2010-03-31T15:04:54Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2235378' lon='8.8174883'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.209' />
+    <tag k='name' v='1.209' />
+  </node>
+  <node id='411729117' timestamp='2010-03-31T15:04:54Z' uid='254788' user='ageiter' visible='true' version='5' lat='47.2235685' lon='8.8173863'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.202' />
+    <tag k='name' v='1.202' />
+  </node>
+  <node id='411729122' timestamp='2010-03-31T15:04:54Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2236808' lon='8.8172296'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.201' />
+    <tag k='name' v='1.201' />
+  </node>
+  <node id='411729087' timestamp='2010-03-31T15:04:54Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2234744' lon='8.8175667'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.211' />
+    <tag k='name' v='1.211' />
+  </node>
+  <node id='411729089' timestamp='2010-03-31T15:04:54Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2234113' lon='8.8176434'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.213' />
+    <tag k='name' v='1.213' />
+  </node>
+  <node id='411729119' timestamp='2010-03-31T15:04:54Z' uid='254788' user='ageiter' visible='true' version='5' lat='47.2237035' lon='8.8173064'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.205' />
+    <tag k='name' v='1.205' />
+  </node>
+  <node id='411729121' timestamp='2010-03-31T15:04:54Z' uid='254788' user='ageiter' visible='true' version='4' lat='47.2237034' lon='8.8172719'>
+    <tag k='level' v='2' />
+    <tag k='indoor' v='yes' />
+    <tag k='description' v='Classroom 1.203' />
+    <tag k='name' v='1.203' />
+  </node>
+</osm>

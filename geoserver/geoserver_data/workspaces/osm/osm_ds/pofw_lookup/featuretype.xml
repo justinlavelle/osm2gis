@@ -1,0 +1,54 @@
+<featureType>
+  <id>FeatureTypeInfoImpl-3db9afb6:12729676425:-7fdc</id>
+  <name>pofw_lookup</name>
+  <nativeName>pofw_lookup</nativeName>
+  <namespace>
+    <id>NamespaceInfoImpl-3db9afb6:12729676425:-8000</id>
+  </namespace>
+  <title>OSM PofW Lookup</title>
+  <abstract>PofW Lookup from OSM map features</abstract>
+  <keywords>
+    <string>osm_ds</string>
+    <string>pofw</string>
+  </keywords>
+  <nativeCRS>GEOGCS[&quot;WGS 84&quot;, &#xd;
+  DATUM[&quot;World Geodetic System 1984&quot;, &#xd;
+    SPHEROID[&quot;WGS 84&quot;, 6378137.0, 298.257223563, AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]], &#xd;
+    AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]], &#xd;
+  PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], &#xd;
+  UNIT[&quot;degree&quot;, 0.017453292519943295], &#xd;
+  AXIS[&quot;Geodetic longitude&quot;, EAST], &#xd;
+  AXIS[&quot;Geodetic latitude&quot;, NORTH], &#xd;
+  AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</nativeCRS>
+  <srs>EPSG:4326</srs>
+  <nativeBoundingBox>
+    <minx>-180.0</minx>
+    <maxx>180.0</maxx>
+    <miny>-90.0</miny>
+    <maxy>90.0</maxy>
+    <crs>EPSG:4326</crs>
+  </nativeBoundingBox>
+  <latLonBoundingBox>
+    <minx>-180.0</minx>
+    <maxx>180.0</maxx>
+    <miny>-90.0</miny>
+    <maxy>90.0</maxy>
+    <crs>EPSG:4326</crs>
+  </latLonBoundingBox>
+  <projectionPolicy>FORCE_DECLARED</projectionPolicy>
+  <enabled>true</enabled>
+  <metadata>
+    <entry key="kml.regionateAttribute">null</entry>
+    <entry key="cacheAgeMax"></entry>
+    <entry key="indexingEnabled">false</entry>
+    <entry key="cachingEnabled">false</entry>
+    <entry key="kml.regionateStrategy">best_guess</entry>
+    <entry key="dirName">osm_ds_pofw_lookup</entry>
+    <entry key="kml.regionateFeatureLimit">15</entry>
+  </metadata>
+  <store class="dataStore">
+    <id>DataStoreInfoImpl-3db9afb6:12729676425:-7fed</id>
+  </store>
+  <maxFeatures>0</maxFeatures>
+  <numDecimals>0</numDecimals>
+</featureType>

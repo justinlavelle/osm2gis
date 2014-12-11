@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osmChange version='0.6'>
+	<modify>
+		<node id='1' lat='42.0' lon='20.0'>
+			<tag k='amenity' v='university' />
+		</node>
+	</modify>
+</osmChange>

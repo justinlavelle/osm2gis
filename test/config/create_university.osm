@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <bounds minlat='64.1053316' minlon='-21.9982553' maxlat='64.1063764' maxlon='-21.9952726' origin='CGImap 0.0.2' />
+  <node id='1132126679' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438' lat='64.12152728617056' lon='-22.026534791521364' />
+  <node id='1132126688' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438' lat='64.12186530585858' lon='-22.02598011397751' />
+  <node id='1132126694' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438' lat='64.12166158097116' lon='-22.02657037460909' />
+  <node id='1132126697' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438' lat='64.12184429394371' lon='-22.026258499310842' />
+  <node id='1132126722' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438' lat='64.12183150407473' lon='-22.026911553626636'>
+    <tag k='amenity' v='university' />
+    <tag k='name' v='Uni A.' />
+  </node>
+  <node id='1132126725' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438' lat='64.12171639498906' lon='-22.026495022188037' />
+  <node id='1132126729' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438' lat='64.12172370351662' lon='-22.026237568082777' />
+  <node id='1132126730' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438' lat='64.12166432167463' lon='-22.02682364246874' />
+  <node id='1132126732' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438' lat='64.12160585327551' lon='-22.026683403240664' />
+  <node id='1132126735' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438' lat='64.12160859398448' lon='-22.02635478295997' />
+  <node id='1132126736' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438' lat='64.12173557986978' lon='-22.02595708962663' />
+  <node id='1132126758' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438' lat='64.12172096281901' lon='-22.026727358819613' />
+  <node id='1132126765' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438' lat='64.12154281689493' lon='-22.02680061811786' />
+  <way id='97803121' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438'>
+    <nd ref='1132126697' />
+    <nd ref='1132126729' />
+    <nd ref='1132126736' />
+    <nd ref='1132126688' />
+    <nd ref='1132126697' />
+    <tag k='building' v='yes' />
+    <tag k='name' v='Build C' />
+  </way>
+  <way id='97803122' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438'>
+    <nd ref='1132126730' />
+    <nd ref='1132126758' />
+    <nd ref='1132126694' />
+    <nd ref='1132126725' />
+    <nd ref='1132126735' />
+    <nd ref='1132126679' />
+    <nd ref='1132126732' />
+    <nd ref='1132126765' />
+    <nd ref='1132126730' />
+    <tag k='amenity' v='university' />
+    <tag k='name' v='Uni B.' />
+  </way>
+</osm>

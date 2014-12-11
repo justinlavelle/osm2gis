@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema_def_and_mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="mappingconfig_v1.xsd">
+	<dst_schema_def>
+		<dst_table_def name="gisentity">
+			<dst_column name="osm_id" type="bigint" not-null="true" />
+			<dst_column name="lastchange" type="TIMESTAMP" not-null="false" />
+			<dst_column name="type" type="VARCHAR(255)" not-null="false" />
+			<dst_column name="name" type="VARCHAR(255)" not-null="false" />
+			<dst_column name="keyvalue" type="hstore" />
+		</dst_table_def>
+		<dst_table_def name="water" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326, 'MULTIPOLYGON', 2)" />
+		</dst_table_def>
+	</dst_schema_def>
+	<src_to_dst_mappings>
+		<!-- WATER -->
+		<mapping type="multipolygon">
+			<and_ed_conditions>
+				<tag k="natural" v="water" />
+			</and_ed_conditions>
+			<dst_table name="water" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="water" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+	</src_to_dst_mappings>
+</schema_def_and_mapping>

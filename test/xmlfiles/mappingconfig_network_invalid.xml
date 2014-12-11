@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema_def_and_mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="mappingconfig_v1.xsd">
+	<dst_schema_def>
+		<dst_view_def name="trainnetwork_lookup">
+			<![CDATA[
+				
+			]]>
+		</dst_view_def>
+		<dst_table_def name="gisentity">
+			<dst_column name="osm_id" type="bigint" not-null="true" /> 
+			<dst_column name="lastchange" type="TIMESTAMP" />
+			<dst_column name="type" type="VARCHAR(30)" />
+			<dst_column name="name" type="VARCHAR(255)" />
+			<dst_column name="keyvalue" type="hstore" />
+		</dst_table_def>
+		<dst_table_def name="railway">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="osm_id" type="bigint" not-null="true" />
+			<dst_column name="lastchange" type="TIMESTAMP" />
+			<dst_column name="type" type="VARCHAR(30)" />
+			<dst_column name="keyvalue" type="hstore" />
+			<dst_column name="geom" type="geometry(4326, 'LINESTRING', 2)" />
+		</dst_table_def>
+		<dst_table_def name="railwaystation" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326,'POINT',2)" />
+		</dst_table_def>
+		<dst_table_def name="trainnetwork" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="operator" type="VARCHAR(30)" />
+		</dst_table_def>
+		<dst_table_def name="trainroute" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="route" type="VARCHAR(30)" />
+			<dst_column name="network" type="VARCHAR(30)" />
+			<dst_column name="operator" type="VARCHAR(30)" />
+		</dst_table_def>
+		<dst_join_table_def name="trainnetwork_trainroute">
+			<dst_column name="trainnetwork_id" type="int" primary-key="true" references="trainnetwork" />
+			<dst_column name="trainroute_id" type="int" primary-key="true" references="trainroute" />
+		</dst_join_table_def>
+		<dst_join_table_def name="trainroute_railway">
+			<dst_column name="trainroute_id" type="int" primary-key="true" references="trainroute" />
+			<dst_column name="railway_id" type="int" primary-key="true" references="railway" />
+		</dst_join_table_def>
+		<dst_join_table_def name="trainroute_railwaystation">
+			<dst_column name="trainroute_id" type="int" primary-key="true" references="trainroute" />
+			<dst_column name="railwaystation_id" type="int" primary-key="true" references="railwaystation"/>
+			<dst_column name="role" type="VARCHAR(30)" />
+		</dst_join_table_def>
+		<dst_view_def name="trainnetwork_lookup">
+			<![CDATA[
+				
+			]]>
+		</dst_view_def>
+		<dst_view_def name="trainnroute_lookup">
+			<![CDATA[
+				
+			]]>
+		</dst_view_def>
+	</dst_schema_def>
+	<src_to_dst_mappings>
+		<!-- Railway stations -->
+		<mapping dst_geom_type="point">
+			<and_ed_conditions>
+				<tag k="railway" v="station" />
+			</and_ed_conditions>
+			<dst_table name="railwaystation" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_type%" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping dst_geom_type="point">
+			<and_ed_conditions>
+				<tag k="railway" v="halt" />
+			</and_ed_conditions>
+			<dst_table name="railwaystation" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_type%" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping dst_geom_type="point">
+			<and_ed_conditions>
+				<tag k="railway" v="tram_stop" />
+			</and_ed_conditions>
+			<dst_table name="railwaystation" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_type%" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<!-- Railways -->
+		<mapping dst_geom_type="linestring">
+			<and_ed_conditions>
+				<tag k="railway" v="rail" />
+			</and_ed_conditions>
+			<dst_table name="railway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_railway%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping dst_geom_type="linestring">
+			<and_ed_conditions>
+				<tag k="railway" v="light_rail" />
+			</and_ed_conditions>
+			<dst_table name="railway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_railway%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping dst_geom_type="linestring">
+			<and_ed_conditions>
+				<tag k="railway" v="subway" />
+			</and_ed_conditions>
+			<dst_table name="railway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_railway%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping dst_geom_type="linestring">
+			<and_ed_conditions>
+				<tag k="railway" v="tram" />
+			</and_ed_conditions>
+			<dst_table name="railway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_railway%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping dst_geom_type="linestring">
+			<and_ed_conditions>
+				<tag k="railway" v="monorail" />
+			</and_ed_conditions>
+			<dst_table name="railway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_railway%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<mapping dst_geom_type="linestring">
+			<and_ed_conditions>
+				<tag k="railway" v="preserved" />
+			</and_ed_conditions>
+			<dst_table name="railway" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_railway%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		<!-- Trainnetwork -->
+		<mapping dst_geom_type="relation">
+			<and_ed_conditions>
+				<tag v="type" k="network" />
+			</and_ed_conditions>
+			<dst_table name="trainnetwork" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_railway%" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="operator" value="%tag_operator%" />
+			</dst_columns>
+			<member>
+				<related_table name="trainroute">
+					<join_table name="trainnetwork_trainroute" />
+					<join_table_columns>
+						<column name="trainnetwork_id" value="%db_relation_id%" />
+						<column name="trainroute_id" value="%db_member_id%" />
+					</join_table_columns>
+				</related_table>
+			</member>
+		</mapping>
+		<!-- Trainroutes -->
+		<mapping dst_geom_type="relation">
+			<and_ed_conditions>
+				<tag v="type" k="route" />
+				<tag v="route" k="train" />
+			</and_ed_conditions>
+			<dst_table name="trainroute" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="%tag_railway%" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="route" value="%tag_route%" />
+				<column name="network" value="%tag_network%" />
+				<column name="operator" value="%tag_operator%" />
+			</dst_columns>
+			<member>
+				<related_table name="railway" ref_column="osm_id">
+					<join_table name="trainroute_railway" />
+					<join_table_columns>
+						<column name="trainroute_id" value="%db_relation_id%" />
+						<column name="railway_id" value="%db_member_id%" />
+					</join_table_columns>
+				</related_table>
+				<related_table name="railwaystation">
+					<join_table name="trainroute_railwaystation" />
+					<join_table_columns>
+						<column name="trainroute_id" value="%db_relation_id%" />
+						<column name="railwaystation_id" value="%db_member_id%" />
+						<column name="role" value="%member_role%" />
+					</join_table_columns>
+
+				</related_table>
+			</member>
+		</mapping>
+	</src_to_dst_mappings>
+</schema_def_and_mapping>

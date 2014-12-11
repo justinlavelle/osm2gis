@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osmChange version="0.6" generator="Osmosis 0.37-SNAPSHOT">
+
+  <modify>
+    <node id='1132126722' timestamp='2011-02-03T08:37:23Z' version='2' lat='64.12183150407473' lon='-22.026911553626636'>
+      <tag k='amenity' v='university' />
+      <tag k='name' v='Uni A.' />
+      <tag k='btag' v='Net Value' />
+    </node>
+  </modify>
+  
+  <modify>
+    <way id='97803121' timestamp='2011-02-03T08:37:23Z' version='2'>
+      <nd ref='1132126697' />
+      <nd ref='1132126729' />
+      <nd ref='1132126736' />
+      <nd ref='1132126688' />
+      <nd ref='1132126697' />
+      <tag k='building' v='yes' />
+      <tag k='name' v='Build C' />
+      <tag k='atag' v='Remove that' />
+    </way>
+  </modify>
+
+</osmChange>

@@ -1,0 +1,94 @@
+Name
+
+osm2gis - OpenStreetMap to Postgis
+
+
+Synopsis
+
+osm2gis --config -h [hostname] -d [database] -u [user] -p [password] 					//Save the Config file content
+osm2gis --create-tables 										//The Logon Parameters will be looked up in the config file
+osm2gis --initial-import -l [planetfileurl] --latMin [laltitude] --lonMin [lonitude] 
+					    --latMax [laltitude] --lonMin [lonitude]			//Does an initial Import -> Uses Login information from the Config File
+
+
+osm2gis --schedule-update -r daily -o http://planet.openstreetmap.org -b 2009041307-2009041308.osc.gz
+
+Description
+
+Switches
+
+-c, --config 
+	Saves all given Config parameters. The Parameters stored in the Config file will be used by any
+	other Option if the Values are not set via the commandline options described in this manual.
+
+-i, --initial-import
+	An initial import for the Database will be launched. The Paramenters for the Databse Login must be
+	provided via the commandline options described in this manual or via the options described in this manual.
+	
+-s, --schedule-update 
+	Schedules an incremental update for the Database content, upgrading to the latest diff file
+	The frequency of the update can be set via the --frequency option	
+	
+-v, --update
+    Upgrades the Database content with the specified diff file. Does not catch up to the latest diff file like -schedule-update
+    The frequency sets the diff file type (minutely, hourly or daily)
+
+--create-views
+	Runs only the view SQL that you have defined in your config.xml file.
+
+--consistency
+	Checks the geoserver sld configuration against your database and your config.xml file.	
+	
+
+Options
+
+-m, --mapping
+	Path to the Configuration Xml File. needed in --initial-import and consistency for the first time.
+
+-r, --frequency [daily|hourly|minutely]
+	The frequency of the scheduled update will be set.
+
+-o, --update-root
+	Gives the Root URL for the Location of the Differential files. This will most likley be the Default:
+	http://planet.openstreetmap.org
+
+-b, --initial-diff
+	Name of the Initial Diff File for daily updates
+
+-t, --initial-diff-replicate
+	Name of the Initial Diff File for minutely and hourly updates
+
+-h, --host [hostname]
+	Name of the Computer on which the Database is located
+
+-d, --database [database] 
+	Name of the Postgre Database
+
+-u, --user [username] 
+	Name of the Database User
+
+-p, --password [password] 
+	Password for the Database User
+
+-f, --planet-file [planetfilepath] 
+	Location for the Planet file.
+	This Option is only used for the Initial Import. Only one Location can be used.
+	A File on the Internet, which url is given by the --planeturl option or a local file given
+	by this option
+
+-l, --planet-url [planetfileurl]
+	Location of the Planet file on the Internet
+	This option is only used for the Initial Import. Only one Location can be used.
+	A File on the Internet, which url is given by this option or a local file given
+	by the --planetfile option. Thoug its higly recommendet to download the planet.osm file
+	and use the --planetfile option.
+
+--latmin [minimum latitude]
+	
+--lonmin [minimum lonitude]
+
+--latmax [maximum latitude]
+
+--lonmin [maximum longitude]
+
+	

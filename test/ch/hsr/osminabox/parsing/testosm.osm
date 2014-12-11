@@ -1,0 +1,38 @@
+<osm version="0.6" generator="OpenStreetMap server">
+	<bounds minlat="0" minlon="0" maxlat="180" maxlon="180" />
+	<node id="123" timestamp="2001-01-01T00:00:00.0+11:00" lat="45.0" lon="8.0" uid="345">
+		<tag k="created_by" v="Testing" />
+	</node>
+	<node id="124" timestamp="2001-01-01T00:00:00.0+11:00" lat="35.0" lon="7.0" uid="345">
+		<tag k="created_by" v="Testing" />
+	</node>
+	<node id="125" timestamp="2001-01-01T00:00:00.0+11:00" lat="25.0" lon="6.0" uid="345">
+		<tag k="created_by" v="Testing" />
+	</node>
+	<way id="131" timestamp="2001-01-01T00:00:00.0+11:00" user="Testing" uid="345" visible="true">
+		<nd ref="123" />
+		<nd ref="124" />
+		<tag k="name" v="Teststrasse" />
+		<tag k="created_by" v="Testing" />
+	</way>
+	<way id="132" timestamp="2001-01-01T00:00:00.0+11:00" user="Testing" uid="345" visible="true">
+		<nd ref="124" />
+		<nd ref="125" />
+		<tag k="name" v="Musterweg" />
+		<tag k="created_by" v="Testing" />
+	</way>
+	<relation id="141" timestamp="2001-01-01T00:00:00.0+11:00" user="Testing" uid="345" visible="true">
+		<member type="node" ref="124" role="via" />
+		<member type="way" ref="131" role="to" />
+		<member type="way" ref="132" role="from" />
+		<tag k="restriction" v="no_right_turn" />
+		<tag k="created_by" v="Testing" />
+		<tag k="type" v="restriction" />
+	</relation>
+	<relation id="142" timestamp="2001-01-01T00:00:00.0+11:00" user="Testing" uid="345" visible="true">
+		<member type="way" ref="131" role="outer" />
+		<member type="way" ref="132" role="inner" />
+		<tag k="created_by" v="Testing" />
+		<tag k="type" v="multipolygon" />
+	</relation>
+</osm>

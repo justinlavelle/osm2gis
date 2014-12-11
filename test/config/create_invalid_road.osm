@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6'>
+ 
+  <way id='1' timestamp='2011-02-02T08:37:23Z' visible='true' version='1' changeset='7162438'>
+    <tag k='highway' v='motorway' />
+    <tag k='name' v='Testway' />
+  </way>
+ 
+</osm>

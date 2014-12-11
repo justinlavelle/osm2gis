@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema_def_and_mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="mappingconfig_v1.xsd">
+	<dst_schema_def>
+		<dst_table_def name="gisentity">
+			<dst_column name="osm_id" type="bigint" not-null="true" />
+			<dst_column name="lastchange" type="TIMESTAMP" not-null="false" />
+			<dst_column name="type" type="VARCHAR(255)" not-null="false" />
+			<dst_column name="name" type="VARCHAR(255)" not-null="false" />
+			<dst_column name="keyvalue" type="hstore" />
+		</dst_table_def>		
+		<dst_table_def name="poi" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326,'POINT',2)" />
+		</dst_table_def>
+		<dst_table_def name="mypoi" inherits="gisentity">
+			<dst_column name="id" type="serial" primary-key="true" />
+			<dst_column name="geom" type="geometry(4326,'POINT',2)" />
+		</dst_table_def>
+		
+		<!--  Create an Index on osm_id for every table -->
+		<dst_table_def_user_defined>
+			<![CDATA[
+				CREATE INDEX "poi_osm_id_idx" ON "poi" USING btree ("osm_id");
+				CREATE INDEX "mypoi_osm_id_idx" ON "mypoi" USING btree ("osm_id");
+			]]>
+		</dst_table_def_user_defined>
+		
+		<!--  Create an Index on type for every table -->
+		<dst_table_def_user_defined>
+			<![CDATA[
+				CREATE INDEX "poi_type_idx" ON "poi" USING btree ("type");
+				CREATE INDEX "mypoi_type_idx" ON "mypoi" USING btree ("type");
+			]]>
+		</dst_table_def_user_defined>
+
+		<dst_view_def name="poi_lookup">
+			<![CDATA[
+				CREATE VIEW poi_lookup AS
+					SELECT CASE WHEN type='bus_stop' then 1
+						WHEN type='terminal' then 2
+						WHEN type='hospital' then 3
+						WHEN type='viewpoint' then 4
+						WHEN type='university' then 5
+						WHEN type='school' then 6
+						WHEN type='kindergarten' then 7
+						WHEN type='parking' then 8
+						WHEN type='restaurant' then 9
+						WHEN type='fast_food' then 10
+						WHEN type='cafe' then 11
+						WHEN type='bank' then 12
+						WHEN type='hpost_office' then 13
+						WHEN type='cinema' then 14
+						ELSE 1000
+						END AS index,
+						osm_id, name, type, (poi.keyvalue->'url') AS url, geom				
+					FROM poi
+					WHERE name!=''
+					ORDER BY index;		
+
+					INSERT INTO geometry_columns(
+								f_table_catalog, f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, "type")
+					VALUES ('', 'public', 'poi_lookup', 'geom', 2, 4326, 'POINT');					
+			]]>
+		</dst_view_def>
+
+	</dst_schema_def>
+	<src_to_dst_mappings>
+
+		<!-- PLACE -->
+
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="university" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="university" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="motel" />
+			</and_ed_conditions>
+			<dst_table name="poi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="motel" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		
+		<!-- MyPOI-->
+		
+		<mapping type="point">
+			<and_ed_conditions>
+				<tag k="amenity" v="university" />
+			</and_ed_conditions>
+			<dst_table name="mypoi" />
+			<dst_columns>
+				<column name="osm_id" value="%attribute_id%" />
+				<column name="lastchange" value="%attribute_timestamp%" />
+				<column name="type" value="university" />
+				<column name="name" value="%tag_name%" />
+				<column name="keyvalue" value="%tags_all%" />
+				<column name="geom" value="%geom%" />
+			</dst_columns>
+		</mapping>
+		
+	</src_to_dst_mappings>
+</schema_def_and_mapping>

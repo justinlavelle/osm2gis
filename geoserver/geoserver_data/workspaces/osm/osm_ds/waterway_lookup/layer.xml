@@ -1,0 +1,17 @@
+<layer>
+  <name>waterway_lookup</name>
+  <id>LayerInfoImpl-3db9afb6:12729676425:-7fc7</id>
+  <path>/</path>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-3db9afb6:12729676425:-7ffa</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-3db9afb6:12729676425:-7fc8</id>
+  </resource>
+  <enabled>true</enabled>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>

@@ -1,0 +1,225 @@
+@charset "utf-8";
+/* CSS Document */
+html
+{
+	height: 100%;
+	width: 100%;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+#scale {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:8px;
+}
+
+#search {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	position: relative;
+}
+
+#header {
+	position: relative;
+	width: 100%;
+	margin-bottom:10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#title {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:17px;
+	font-weight:bold;
+}
+
+.input {
+	border: 1px solid #999;
+}
+
+.input_focus {
+	border: 1px solid #006CAF;
+}
+
+.btn_search {
+	width: 62px;
+	height: 20px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	cursor: pointer; /* hand-shaped cursor */
+	cursor: hand; /* for IE 5.x */
+	background: transparent url(../img/btn_search.png) no-repeat center top;
+}
+
+#sliderWrap {
+	background:#FFFFFF;
+	margin: 0 0;
+	width: 50px;
+/*	height: 100%;*/
+}
+
+#slider {
+	position: absolute;
+	height: 100%;
+	right:0px;
+	width:100%;
+	margin-top: -150px;
+	left: -282px;
+	top: 137px;
+}
+
+#copyright {
+	position: absolute;
+	background-color:#FFF;
+	padding-left: 12px;
+	width: 210px;
+	height: 18px;
+	right:0px;
+	margin-top: -150px;
+	left: 51px;
+}
+
+.cr {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:9px;
+	padding-top:4px
+}
+
+#maprights {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:9px;
+	position: absolute;
+	width: 90%;
+	height: 18px;
+	text-align:center;
+	top: 79px;
+}
+
+#slider img {
+	border: 0;
+}
+
+#resultheader {
+	background:#cccccc;
+	padding-left: 32px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666;
+}
+
+#resulttitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	padding-left: 32px;
+}
+
+#resultset {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background:#ffffff;
+	right: 0px;
+	width:278;
+	overflow:auto;
+	padding-left: 32px;
+}
+
+#resultset span {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #006CAF;
+	text-decoration: underline;
+	cursor: pointer; /* hand-shaped cursor */
+	cursor: hand; /* for IE 5.x */
+}
+
+.resultitem {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #E0E0E0;
+	padding-left: 35px;
+	padding-right: 5px;
+	right:0px;
+}
+
+.noresult {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 35px;
+	padding-right: 5px;
+	right:0px;
+}
+
+#sliderContent {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin: 21px 0 0 130px;
+	position: absolute;
+	vertical-align:top;
+	horizontal-align:left;
+	border-top: none;
+	border-right: 1px solid #808986;
+	border-top: 1px solid #808986;
+	border-bottom: 1px solid #808986;
+	background-color: #fff;
+	left: -127px;
+	right:0px;
+	top: 67px;
+	width: 247px;
+	z-index: 10000;
+}
+
+#openCloseWrap {
+	position:absolute;
+	margin: 88px 0 0 120px;
+	left: 145px;
+	top: 60x;
+	width: 16px;
+	height: 16px;
+	z-index: 10000;
+}
+
+#IEroot #openCloseWrap {
+    top: -72;
+}
+
+.olControlScaleLine {
+	font-family: Arial, Helvetica, sans-serif;
+   	left: 30px;
+   	bottom: 55px;
+   	font-size: xx-small;
+}
+
+.olControlPermalink {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+    right: 10px;
+    bottom: 45px;
+    display: block;
+    position: absolute;
+}
+
+div.olControlMousePosition {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+    right: 10px;
+    bottom: 45px;
+    right: 85px;
+    display: block;
+    position: absolute;
+}
+
+.olControlScale {
+    font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+    right: 10px;
+    bottom: 45px;
+    right: 180px;
+    display: block;
+    position: absolute;
+}

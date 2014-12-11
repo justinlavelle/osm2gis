@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="osm2gis" default="ziprelease" basedir=".">
+
+	<!-- general properties -->
+	<property name="build.dir" location="bin" />
+	<property name="src.dir" location="src" />
+	<property name="test.dir" location="test" />
+	<property name="lib.dir" location="lib" />
+	<property name="config.dir" location="config" />
+	<property name="build.prod.dir" location="${build.dir}/prod" />
+	<property name="build.test.dir" location="${build.dir}/test" />
+	<property name="test.report.dir" location="${build.dir}/test-reports" />
+	<property name="schemadefs.dir" value="${config.dir}/schemadefs" />
+
+	<!-- properties for release rolling -->
+	<property name="version" value="1.0" />
+	<property name="release.dir" location="release" />
+	<property name="releasejar.dir" location="releasejar" />
+	<property name="releasezipwin.dir" location="releasezipwin" />
+	<property name="releasezipunix.dir" location="releasezipunix" />
+	<property name="release.classpath" value="lib/postgresql-8.3-604.jdbc4.jar" />
+	<buildnumber file="build.num" />
+  	<tstamp>
+    	<format property="today" pattern="yyyy-MM-dd HH:mm:ss" />
+   	</tstamp>
+	<property name="manifest.file" value="MANIFEST.MF" />
+	<property name="jar.file" value="osm2gis.jar" />
+ 	<property name="zipwin.file" value="osm2gis_win.zip" />
+	<property name="zipunix.file" value="osm2gis_unix.zip" />
+	<property name="releasewin.file" value="osminabox${version}_win.zip" />
+	<property name="releaseunix.file" value="osminabox${version}_unix.zip" />
+	<property name="osmcreatesql.file" value="${config.dir}/osm_create.sql" />
+	<property name="mappingconfig_test1.file" value="${config.dir}/mappingconfig_test1.xml" />
+	<property name="mappingconfig_test2.file" value="${config.dir}/mappingconfig_test2.xml" />
+	
+ 	
+ 	<path id="project.classpath">
+		<pathelement location="${build.prod.dir}" />
+		<pathelement location="${build.test.dir}" />
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	
+	<path id="release.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+			<exclude name="junit-4.5.jar"/>
+		</fileset>
+	</path>
+	
+	<pathconvert property="manifest.classpath" pathsep=" ">
+	    <path refid="release.classpath" />
+	    <flattenmapper />
+		<map from="" to="lib/"/>
+	  </pathconvert>
+
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete dir="${test.report.dir}" />
+		<delete file="${release.dir}/${releasewin.file}" />
+		<delete file="${release.dir}/${releaseunix.file}" />
+		<delete dir="${releasejar.dir}" />
+		<delete dir="${releasezipwin.dir}" />
+		<delete dir="${releasezipunix.dir}" />
+		<delete file="${manifest.file}" />
+		<delete dir="${schemadefs.dir}" />
+		<delete file="${osmcreatesql.file}" />
+		<delete file="${mappingconfig_test1.file}" />
+		<delete file="${mappingconfig_test2.file}" />
+	</target>
+
+	<target name="prepare" depends="clean">
+		<mkdir dir="${build.prod.dir}" />
+		<mkdir dir="${build.test.dir}" />
+		<mkdir dir="${release.dir}" />
+		<mkdir dir="${releasejar.dir}" />
+		<mkdir dir="${releasezipwin.dir}" />
+		<mkdir dir="${releasezipunix.dir}" />
+		<mkdir dir="${test.report.dir}" />
+	</target>
+
+	<target name="compile" depends="prepare">
+		<javac srcdir="${src.dir}" destdir="${build.prod.dir}">
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<target name="compile-tests" depends="compile">
+		<javac srcdir="${test.dir}" destdir="${build.test.dir}">
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<target name="test" depends="compile-tests">
+		<junit errorproperty="test.failed" failureproperty="test.failed">
+			<classpath refid="project.classpath" />
+			<formatter type="brief" usefile="false"/>
+			<formatter type="xml" usefile="true" />
+			<batchtest todir="${test.report.dir}">
+				<fileset dir="${build.test.dir}" includes="**/*Test.class" />
+			</batchtest>
+		</junit>
+		<fail message="one or more tests failed!" if="test.failed" />
+	</target>
+
+
+
+	<target name="jar" depends="test">
+		<manifest file="${manifest.file}">
+			<attribute name="Built-By" value="${user.name}"/>
+			<attribute name="Implementation-Version" value="${version}-b${build.number}"/>   
+			<attribute name="Built-Date" value="${today}"/> 
+		    <attribute name="Main-Class" value="ch.hsr.osminabox.Main"/>
+			<attribute name="Class-Path" value="${manifest.classpath}" /> 
+		</manifest>
+
+		<jar destfile="${releasejar.dir}/${jar.file}" basedir="${build.prod.dir}" manifest="${manifest.file}"/>
+	</target>
+
+	<target name="zipgis" depends="jar">
+		<zip destfile="${releasezipwin.dir}/${zipwin.file}" basedir="${releasejar.dir}">
+			<zipfileset dir=".">
+				<include name="lib/*" />
+				<include name="config/*" />
+				<include name="manpage.txt" />
+				<include name="osm2gis.bat" />
+				<exclude name="lib/junit-4.5.jar" />
+			</zipfileset>
+		</zip>
+		<zip destfile="${releasezipunix.dir}/${zipunix.file}" basedir="${releasejar.dir}">
+			<zipfileset dir=".">
+				<include name="lib/*" />
+				<include name="config/*" />
+				<include name="manpage.txt" />
+				<include name="osm2gis.sh" />
+				<exclude name="lib/junit-4.5.jar" />
+			</zipfileset>
+		</zip>
+		<delete file="${release.dir}/${jar.file}" />
+	</target>
+	
+	<target name="ziprelease" depends="zipgis">
+		<zip destfile="${release.dir}/${releasewin.file}" basedir="${releasezipwin.dir}">
+					<zipfileset dir=".">
+						<include name="geoserver/**" />
+						<include name="install/**" />
+						<include name="installer.bat" />
+					</zipfileset>
+				</zip>
+		<zip destfile="${release.dir}/${releaseunix.file}" basedir="${releasezipunix.dir}">
+			<zipfileset dir=".">
+				<include name="geoserver/**" />
+				<include name="installer.sh" />
+			</zipfileset>
+		</zip>
+		<delete file="${release.dir}/${jar.file}" />
+	</target>
+	
+</project>

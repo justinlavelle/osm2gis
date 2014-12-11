@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osmChange version='0.6'>
+	<delete>
+		<node id='1' />
+	</delete>
+</osmChange>

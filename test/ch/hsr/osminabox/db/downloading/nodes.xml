@@ -1,0 +1,9 @@
+<osm version="0.6" generator="Test">
+	<node id="1" lat="45.0" lon="8.0" version="1" changeset="1" user="tester"
+		uid="2" visible="false" timestamp="2010-06-10T18:01:12Z">
+		<tag k="tag1" v="value1" />
+		<tag k="tag2" v="value1,value2,value3" />
+	</node>
+	<node id="2" lat="55" lon="-10" version="3" changeset="2" user="tester"
+		uid="2" visible="true" timestamp="2009-04-14T15:42:58Z" />
+</osm>

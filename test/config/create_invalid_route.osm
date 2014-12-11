@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6'>
+     <relation id="8" timestamp="2011-02-04T08:16:55Z">
+      <tag k="network" v="testnetwork"/>
+      <tag k="ref" v="T1"/>
+      <tag k="route" v="highway"/>
+      <tag k="type" v="route"/>
+     </relation>
+</osm>

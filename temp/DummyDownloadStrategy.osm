@@ -1,0 +1,17 @@
+These are the (about) weekly planet dumps, based on the OpenStreetMap.org database.
+They are distributed under a Creative Commons Attribution-ShareAlike 2.0 license.
+
+Please note that not all full dumps are being provided due to disk
+space restrictions.  Files, such as, planet-070718-070725.diff.xml.bz2
+provide a changeset of all differences between those dates.  These
+diffs have been produced, using the tool 'planetdiff' which is
+available from
+http://svn.openstreetmap.org/applications/utils/planetdiff/. This tool
+can be used to easily recreate complete planet files. Please refer to
+the planetdiff documentation for details on how to use it.
+
+==================================
+
+We also provide daily diff files. These have been produced with osmosis
+(http://wiki.openstreetmap.org/index.php/Osmosis) and have the format
+2007-09-25--09-25-14:21:03.osc.bz2

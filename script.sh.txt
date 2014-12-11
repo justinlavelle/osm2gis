@@ -1,0 +1,1 @@
+bzcat.exe E:/planet-090520.osm.bz2 | java -jar osm2gis.jar --initial-import

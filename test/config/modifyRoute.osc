@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osmChange version="0.6" generator="Osmosis 0.37-SNAPSHOT">
+  <modify>
+  
+    <relation id="5" version="1" timestamp="2011-01-31T09:12:41Z" uid="1" user="Tester" changeset="2">
+      <member type="way" ref="4" role=""/>
+      <tag k="network" v="testing"/>
+      <tag k="note" v="_This is a note"/>
+      <tag k="operator" v="Tester"/>
+      <tag k="route" v="bicycle"/>
+      <tag k="type" v="route"/>
+    </relation>
+    
+    <relation id="5" version="2" timestamp="2011-01-31T09:18:18Z" uid="1" user="Tester" changeset="2">
+      <tag k="network" v="rcn"/>
+      <tag k="note" v="91-95"/>
+      <tag k="operator" v="Testing and Co."/>
+      <tag k="route" v="bicycle"/>
+      <tag k="type" v="route"/>
+    </relation>
+  </modify>
+</osmChange>

@@ -1,0 +1,18 @@
+<osm version="0.6" generator="OpenStreetMap server">
+	<node id="1" lat="50.0" lon="10.0" version="1" changeset="1" user="tester"
+		uid="2" visible="true" timestamp="2010-04-06T23:09:49Z" />
+	<node id="2" lat="51.0" lon="11.0" version="1" changeset="1" user="tester"
+		uid="2" visible="true" timestamp="2010-04-06T23:09:49Z" />
+	<node id="3" lat="52.0" lon="12.0" version="1" changeset="1" user="tester"
+		uid="2" visible="true" timestamp="2010-04-06T23:09:49Z">
+		<tag k="k1" v="v1" />
+	</node>
+	<way id="4" visible="true" timestamp="2010-04-06T23:11:37Z"
+		version="1" changeset="1" user="tester" uid="2">
+		<nd ref="1" />
+		<nd ref="2" />
+		<nd ref="3" />
+		<tag k="tag1" v="value1" />
+		<tag k="tag2" v="value2" />
+	</way>
+</osm>

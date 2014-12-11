@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+2	<seedRequest>
+3	        <name>osm</name>
+12	        <srs>
+13	                <number>4326</number>
+14	        </srs>
+15	        <zoomStart>0</zoomStart>
+16	        <zoomStop>5</zoomStop>
+17	        <format>image/png</format>
+18	       
+19	        <!-- type can be
+20	                * seed (add tiles)
+21	                * reseed (replace tiles)
+22	                * truncate (remove tiles)
+23	               
+24	                truncate is as of beta0 not implemented!
+25	        -->
+26	        <type>reseed</type>
+27	       
+28	        <!-- Number of seeding threads to run in parallel -->
+29	        <threadCount>4</threadCount>
+30	</seedRequest>

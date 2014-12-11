@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osmChange version="0.6" generator="Osmosis 0.37-SNAPSHOT">
+
+  <modify>
+    <node id='1' lat='64.0' lon='-20.0'>
+    <tag k='amenity' v='university' />
+    <tag k='amenity' v='motel' />
+  </node>
+  </modify>
+
+</osmChange>

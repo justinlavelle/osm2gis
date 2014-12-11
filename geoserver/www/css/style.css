@@ -1,0 +1,245 @@
+@charset "utf-8";
+/* CSS Document */
+html
+{
+	height: 100%;
+	width: 100%;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+
+#scale {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:8px;
+}
+
+#search {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	position: relative;
+}
+
+#header {
+	position: relative;
+	width: 100%;
+	margin-bottom:10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#title {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:17px;
+	font-weight:bold;
+}
+
+.input {
+	border: 1px solid #999;
+}
+
+.input_focus {
+	border: 1px solid #006CAF;
+}
+
+.btn_search {
+	width: 62px;
+	height: 20px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	cursor: pointer; /* hand-shaped cursor */
+	cursor: hand; /* for IE 5.x */
+	background: transparent url(../img/btn_search.png) no-repeat center top;
+}
+
+#osmlogo {
+	padding-right:20px;
+}
+
+#sliderWrap {
+	background:#FFFFFF;
+	margin: 0 0;
+	width: 50px;
+	height: 100%;
+}
+
+#slider {
+	position: absolute;
+	width: 150px;
+/*	height: 100%;*/
+	margin-top: -150px;
+	left: -282px;
+	top: 129px;
+}
+
+#copyright {
+	position: absolute;
+	background-color:#FFF;
+	padding-left: 12px;
+	width: 96px;
+	height: 20px;
+	right:0px;
+	margin-top: -150px;
+	left: 25px;
+}
+
+.cr {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:9px;
+	padding-top:4px
+}
+
+#maprights {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+	position: absolute;
+	width: 90%;
+	height: 18px;
+	text-align:center;
+	z-index: 9000;
+}
+
+#slider img {
+	border: 0;
+}
+
+#resultheader {
+	background:#cccccc;
+	padding-left: 32px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666;
+}
+
+#resulttitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#resultset {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background:#ffffff;
+/*	min-height:85%;*/
+/*	max-height:85%;*/
+	overflow:auto;
+}
+
+#results span {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #006CAF;
+	text-decoration: underline;
+	cursor: pointer; /* hand-shaped cursor */
+	cursor: hand; /* for IE 5.x */
+}
+
+.resultitem {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #E0E0E0;
+	padding-left: 35px;
+	padding-right: 5px;
+}
+
+.noresult {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 35px;
+	padding-right: 5px;
+	right:0px;
+}
+
+.resulturl {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	color:#666
+}
+
+.resultinfo {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:#666
+}
+
+
+#sliderContent {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin: 21px 0 0 130px;
+	position: absolute;
+	vertical-align:top;
+	horizontal-align:left;
+	border-top: none;
+	border-right: 1px solid #808986;
+	border-top: 1px solid #808986;
+	border-bottom: 1px solid #808986;
+	left: -97px;
+	top: 75px;
+	width: 247px;
+/*	height: 100%;*/
+	z-index: 10000;
+}
+
+#openCloseWrap {
+	position:absolute;
+	margin: 160px 0 0 120px;
+	left: 145px;
+	top: -64px;
+	width: 16px;
+	height: 16px;
+	z-index: 10000;
+}
+
+.olControlScaleLine {
+	font-family: Arial, Helvetica, sans-serif;
+   	left: 30px;
+   	bottom: 30px;
+   	font-size: xx-small;
+}
+
+.olControlPermalink {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+    right: 10px;
+    bottom: 20px;
+    display: block;
+    position: absolute;
+} 
+
+div.olControlMousePosition {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+    right: 10px;
+    bottom: 20px;
+    right: 85px;
+    display: block;
+    position: absolute;
+}
+
+.olControlScale {
+    font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+    right: 10px;
+    bottom: 20px;
+    right: 180px;
+    display: block;
+    position: absolute;
+}
+
+.usegeowebcache{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+	height: 18px;
+	vertical-align : middle;
+}

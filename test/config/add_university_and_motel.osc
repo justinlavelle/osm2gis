@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osmChange version='0.6' generator='JOSM'>
+  <create>
+	  <node id='999999910' lat='64.0' lon='-20.0'>
+	    <tag k='amenity' v='university' />
+	  </node>
+	  <node id='999999911' lat='64.0' lon='-20.0'>
+	    <tag k='amenity' v='motel' />
+	  </node>
+  </create>
+</osmChange>

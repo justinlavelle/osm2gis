@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6'>
+  <node id='1' lat='64.0' lon='-20.0'>
+    <tag k='amenity' v='university' />
+  </node>
+  <node id='2' lat='64.0' lon='-10.0'>
+    <tag k='amenity' v='motel' />
+  </node>
+</osm>

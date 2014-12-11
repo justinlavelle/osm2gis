@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osmChange version='0.6'>
+  <modify>
+    <node id='2' lat='64.0' lon='-10.0'>
+    </node>
+  </modify>
+</osmChange>

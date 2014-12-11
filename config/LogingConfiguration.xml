@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+        
+  <appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+    <layout class="org.apache.log4j.PatternLayout">
+      <!-- Conversion pattern: Time Priority - Message\n -->
+      <param name="ConversionPattern" value="%d{HH:mm:ss.SSS} %-5p [%c] - %m%n"/>
+
+      <!-- Alternate Conversion pattern: Time Priority - Class[Line] - Message\n -->
+      <!--
+      <param name="ConversionPattern" value="%d{HH:mm:ss.SSS} %-5p %50C[%4L] - %m%n"/>
+      -->
+    </layout>
+  </appender>
+  
+  <appender name="FileAppender" class="org.apache.log4j.RollingFileAppender">
+    <param name="File" value="osm2gis.log"/>
+    <param name="Append" value="false"/>
+    <!-- param name="Threshold" value="info"/ -->
+
+    <layout class="org.apache.log4j.PatternLayout">
+      <!-- Conversion pattern: Time Priority - Message\n -->
+      <param name="ConversionPattern" value="%d{DATE} %-5p [%c] - %m%n"/>
+    </layout>
+  </appender>
+  
+  <logger name="ch.hsr.osminabox.db.OSMDBService">
+  	<level value="trace" />
+  </logger>
+  <logger name="ch.hsr.osminabox.db.util.AreaConstructor">
+  	<level value="debug" />
+  </logger>
+  
+   <!-- Logger für alle Klassen -->
+  <root>
+    <level value="info" />
+    <appender-ref ref="ConsoleAppender" />
+    <appender-ref ref="FileAppender" />
+  </root> 
+
+</log4j:configuration> 

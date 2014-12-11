@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="schema_def_and_mapping">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dst_schema_def"/>
+				<xs:element ref="src_to_dst_mappings"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- START................................................................................dst_schema_def........................................................................... -->
+	<xs:element name="dst_schema_def">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="dst_table_def"/>
+					<xs:element ref="dst_table_def_user_defined"/>
+				</xs:choice>
+				<xs:element ref="dst_join_table_def" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="dst_view_def" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dst_table_def_user_defined" type="xs:string"/>
+	<xs:element name="dst_table_def">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dst_column" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="name" use="required"/>
+			<xs:attribute name="inherits"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dst_join_table_def">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="dst_column"/>
+			</xs:sequence>
+			<xs:attribute name="name" use="required" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dst_view_def">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="name" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>	
+	<xs:element name="dst_column">
+		<xs:complexType>
+			<xs:attribute name="type" use="required"/>
+			<xs:attribute name="primary-key" type="xs:boolean"/>
+			<xs:attribute name="not-null" type="xs:boolean"/>
+			<xs:attribute name="name" use="required"/>
+			<xs:attribute name="references" type="xs:NCName" />
+		</xs:complexType>
+	</xs:element>
+	<!-- END................................................................................dst_schema_def........................................................................... -->
+	<!-- START..........................................................................src_to_dst_mappings...................................................................... -->
+	<xs:element name="src_to_dst_mappings">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="mapping" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="mapping">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="and_ed_conditions"/>
+				<xs:element ref="dst_table"/>
+				<xs:element ref="dst_columns"/>
+				<xs:element minOccurs="0" ref="members"/>
+			</xs:sequence>
+			<xs:attribute name="type" use="required" type="mapping_type"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="and_ed_conditions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tag" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dst_table">
+		<xs:complexType>
+			<xs:attribute name="name" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dst_columns">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="column" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="column">
+		<xs:complexType>
+			<xs:attribute name="name" use="required"/>
+			<xs:attribute name="value" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tag">
+		<xs:complexType>
+			<xs:attribute name="v" use="required"/>
+			<xs:attribute name="k" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="members">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="related_table"/>
+			</xs:sequence>
+			<xs:attribute name="all_required" type="xs:boolean"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="related_table">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="join_table"/>
+				<xs:element minOccurs="0" ref="join_table_columns"/>
+			</xs:sequence>
+			<xs:attribute name="name" use="required" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="join_table">
+		<xs:complexType>
+			<xs:attribute name="name" use="required" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="join_table_columns">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="column" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- END..........................................................................src_to_dst_mappings...................................................................... -->
+	
+	<!-- Datatypes start -->
+	<xs:simpleType name="mapping_type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="point"/>
+			<xs:enumeration value="linestring"/>
+			<xs:enumeration value="multipolygon"/>
+			<xs:enumeration value="relation"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Datatypes end -->
+</xs:schema>
